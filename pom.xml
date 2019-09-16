@@ -10,8 +10,9 @@
     <version>0.1.0-SNAPSHOT</version>
     <modules>
         <module>binlog2delta</module>
+        <module>delta-ehancer</module>
     </modules>
-    <name>Delta Plus</name>
+    <name>MLSQL Plugins</name>
     <url>https://github.com/allwefantasy/mlsql-plugins.git</url>
     <description>
         Plugins for MLSQL
