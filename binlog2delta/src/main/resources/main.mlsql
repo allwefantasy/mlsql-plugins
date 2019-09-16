@@ -1,0 +1,37 @@
+
+set streamName="binlog" where  type="defaultParam";
+
+set host="127.0.0.1"  where  type="defaultParam";
+set port="3306"  where  type="defaultParam";
+set userName="root"  where  type="defaultParam";
+set password="mlsql"  where  type="defaultParam";
+set bingLogNamePrefix="mysql-bin"  where  type="defaultParam";
+set binlogIndex="1"  where  type="defaultParam";
+set binlogFileOffset="4"  where  type="defaultParam";
+set databaseNamePattern="mlsql_console"  where  type="defaultParam";
+set tableNamePattern="script_file"  where  type="defaultParam";
+
+set deltaTableHome="/tmp/binlog2delta"  where  type="defaultParam";
+set idCols="id"  where  type="defaultParam";
+set duration="10"  where  type="defaultParam";
+set checkpointLocation="/tmp/ck-binlog2delta"  where  type="defaultParam";
+
+
+load binlog.`` where
+host="${host}"
+and port="${port}"
+and userName="${userName}"
+and password="${password}"
+and bingLogNamePrefix="${bingLogNamePrefix}"
+and binlogIndex="${binlogIndex}"
+and binlogFileOffset="${binlogFileOffset}"
+and databaseNamePattern="${databaseNamePattern}"
+and tableNamePattern="${tableNamePattern}"
+as binlogTable;
+
+save append binlogTable
+as binlogRate.`${deltaTableHome}/{db}/{table}`
+options mode="Append"
+and idCols="${idCols}"
+and duration="${duration}"
+and checkpointLocation="${checkpointLocation}";

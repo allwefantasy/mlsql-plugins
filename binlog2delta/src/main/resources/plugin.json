@@ -1,0 +1,22 @@
+{
+  "binlog2delta": {
+    "desc": "",
+    "strategy": "tech.mlsql.dsl.includes.DefaultStrategy",
+    "algorithm": [],
+    "ref": [],
+    "compositor": [
+      {
+        "name": "tech.mlsql.dsl.includes.Step",
+        "params": [
+          {
+            "streamName": "",
+            "type": "input"
+          }
+        ]
+      }
+    ],
+    "configParams": {
+      "entry": "main.mlsql"
+    }
+  }
+}
