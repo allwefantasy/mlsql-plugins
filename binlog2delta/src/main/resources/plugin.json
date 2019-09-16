@@ -10,9 +10,10 @@
         "desc": "Stream Name",
         "params": [
           {
-            "streamName": "",
+            "name": "streamName",
             "form_type": "input",
-            "desc": "uniq stream name"
+            "desc": "uniq stream name",
+            "required": true
           }
         ]
       },
@@ -23,47 +24,62 @@
           {
             "name": "host",
             "form_type": "input",
-            "desc": "host name"
+            "desc": "MySQL host name",
+            "required": true
           },
           {
             "name": "port",
             "form_type": "input",
-            "desc": ""
+            "desc": "MySQL port",
+            "required": true
           },
           {
             "name": "userName",
             "form_type": "input",
-            "desc": ""
+            "desc": "MySQL userName",
+            "required": true
           },
           {
             "name": "password",
             "form_type": "input",
-            "desc": ""
-          },
+            "desc": "MySQL password",
+            "required": true
+          }
+        ]
+      },
+      {
+        "name": "tech.mlsql.dsl.includes.Step",
+        "desc": "Collect Binlog Info",
+        "params": [
           {
             "name": "bingLogNamePrefix",
             "form_type": "input",
-            "desc": ""
+            "desc": "normally is mysql-bin",
+            "required": true
           },
           {
             "name": "binlogIndex",
             "form_type": "input",
-            "desc": ""
+            "desc": "number",
+            "required": true
           },
           {
             "name": "binlogFileOffset",
             "form_type": "input",
-            "desc": ""
+            "desc": "number,normally set 4",
+            "required": true
           },
           {
             "name": "databaseNamePattern",
             "form_type": "input",
-            "desc": ""
+            "desc": "",
+            "required": true
           },
           {
             "name": "tableNamePattern",
             "form_type": "input",
-            "desc": ""
+            "desc": "",
+            "required": true
           }
         ]
       },
@@ -74,22 +90,26 @@
           {
             "name": "deltaTableHome",
             "form_type": "input",
-            "desc": "host name"
+            "desc": "HDFS Path where you store data",
+            "required": true
           },
           {
             "name": "idCols",
             "form_type": "input",
-            "desc": ""
+            "desc": "the primary key of data",
+            "required": true
           },
           {
             "name": "duration",
             "form_type": "input",
-            "desc": ""
+            "desc": "normally 10 seconds",
+            "required": true
           },
           {
             "name": "checkpointLocation",
             "form_type": "input",
-            "desc": ""
+            "desc": "checkpointLocation",
+            "required": true
           }
         ]
       }
