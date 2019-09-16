@@ -7,10 +7,89 @@
     "compositor": [
       {
         "name": "tech.mlsql.dsl.includes.Step",
+        "desc": "Stream Name",
         "params": [
           {
             "streamName": "",
-            "type": "input"
+            "form_type": "input",
+            "desc": "uniq stream name"
+          }
+        ]
+      },
+      {
+        "name": "tech.mlsql.dsl.includes.Step",
+        "desc": "Collect MySQL Info",
+        "params": [
+          {
+            "name": "host",
+            "form_type": "input",
+            "desc": "host name"
+          },
+          {
+            "name": "port",
+            "form_type": "input",
+            "desc": ""
+          },
+          {
+            "name": "userName",
+            "form_type": "input",
+            "desc": ""
+          },
+          {
+            "name": "password",
+            "form_type": "input",
+            "desc": ""
+          },
+          {
+            "name": "bingLogNamePrefix",
+            "form_type": "input",
+            "desc": ""
+          },
+          {
+            "name": "binlogIndex",
+            "form_type": "input",
+            "desc": ""
+          },
+          {
+            "name": "binlogFileOffset",
+            "form_type": "input",
+            "desc": ""
+          },
+          {
+            "name": "databaseNamePattern",
+            "form_type": "input",
+            "desc": ""
+          },
+          {
+            "name": "tableNamePattern",
+            "form_type": "input",
+            "desc": ""
+          }
+        ]
+      },
+      {
+        "name": "tech.mlsql.dsl.includes.Step",
+        "desc": "Configure Sink",
+        "params": [
+          {
+            "name": "deltaTableHome",
+            "form_type": "input",
+            "desc": "host name"
+          },
+          {
+            "name": "idCols",
+            "form_type": "input",
+            "desc": ""
+          },
+          {
+            "name": "duration",
+            "form_type": "input",
+            "desc": ""
+          },
+          {
+            "name": "checkpointLocation",
+            "form_type": "input",
+            "desc": ""
           }
         ]
       }
