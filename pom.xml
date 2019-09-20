@@ -11,6 +11,8 @@
     <modules>
         <module>binlog2delta</module>
         <module>delta-ehancer</module>
+        <module>serverless</module>
+        <module>stream-boostrap-at-startup</module>
     </modules>
     <name>MLSQL Plugins</name>
     <url>https://github.com/allwefantasy/mlsql-plugins.git</url>
