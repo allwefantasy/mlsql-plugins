@@ -13,6 +13,7 @@
         <module>delta-ehancer</module>
         <module>serverless</module>
         <module>stream-boostrap-at-startup</module>
+        <module>LastCommand</module>
     </modules>
     <name>MLSQL Plugins</name>
     <url>https://github.com/allwefantasy/mlsql-plugins.git</url>
