@@ -14,7 +14,7 @@ class LastCommand(override val uid: String) extends SQLAlg with VersionCompatibi
   def this() = this(BaseParams.randomUID())
 
   // 
-  override def train(df: DataFrame, path: String, 是params: Map[String, String]): DataFrame = {
+  override def train(df: DataFrame, path: String, params: Map[String, String]): DataFrame = {
 
     val context = ScriptSQLExec.context()
     val command = JSONTool.parseJson[List[String]](params("parameters")).toArray
