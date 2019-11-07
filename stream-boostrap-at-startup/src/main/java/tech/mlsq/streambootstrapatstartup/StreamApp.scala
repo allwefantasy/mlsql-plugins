@@ -21,7 +21,7 @@ class StreamApp extends tech.mlsql.app.App with VersionCompatibility {
     val streams = tryReadTable(root, StreamAppConfig.TABLE, () => root.createDataset[Stream](Seq()).toDF())
     streams.as[Stream].collect().foreach { stream =>
       val session = getSessionByOwner(stream.owner)
-      val job = JobManager.getJobInfo(stream.owner, stream.name, MLSQLJobType.SCRIPT, stream.content, -1)
+      val job = JobManager.getJobInfo(stream.owner, stream.name, MLSQLJobType.STREAM, stream.content, -1)
       setUpScriptSQLExecListener(stream.owner, session, job.groupId, stream.home)
       ScriptRunner.runJob(stream.content, job, (df) => {
 
