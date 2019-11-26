@@ -15,6 +15,7 @@
         <module>last-command</module>
         <module>run-script</module>
         <module>echo-controller</module>
+        <module>table-repartition</module>
     </modules>
     <name>MLSQL Plugins</name>
     <url>https://github.com/allwefantasy/mlsql-plugins.git</url>
