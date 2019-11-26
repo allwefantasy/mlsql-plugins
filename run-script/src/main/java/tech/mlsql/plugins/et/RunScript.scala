@@ -1,7 +1,5 @@
 package tech.mlsql.plugins.et
 
-import java.util.UUID
-
 import org.apache.spark.sql.expressions.UserDefinedFunction
 import org.apache.spark.sql.{DataFrame, SparkSession}
 import streaming.dsl.ScriptSQLExec
@@ -13,7 +11,6 @@ import tech.mlsql.common.utils.serder.json.JSONTool
 import tech.mlsql.dsl.auth.ETAuth
 import tech.mlsql.dsl.auth.dsl.mmlib.ETMethod.ETMethod
 import tech.mlsql.ets.ScriptRunner
-import tech.mlsql.job.{JobManager, MLSQLJobType}
 import tech.mlsql.version.VersionCompatibility
 
 
@@ -25,16 +22,17 @@ class RunScript(override val uid: String) extends SQLAlg with VersionCompatibili
 
     val context = ScriptSQLExec.context()
     val command = JSONTool.parseJson[List[String]](params("parameters")).toArray
-
+    val sparkOpt = Option(df.sparkSession)
     command match {
       case Array(script, "named", tableName) =>
-        val job = JobManager.getJobInfo(context.owner, MLSQLJobType.SCRIPT, UUID.randomUUID().toString, script, -1)
-        var df: DataFrame = null
-        ScriptRunner.runJob(script, job, (data) => {
-          data.createOrReplaceTempView(tableName)
-          df = data
-        })
-        df
+        var jobRes: DataFrame = ScriptRunner.rubSubJob(
+          script,
+          (_df: DataFrame) => {},
+          sparkOpt,
+          true,
+          true).get
+        jobRes.createOrReplaceTempView(tableName)
+        jobRes
       case _ => throw new RuntimeException("try !runScript code named table1")
     }
 
