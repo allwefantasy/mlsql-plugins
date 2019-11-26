@@ -58,7 +58,7 @@ VALUES
 0,
 'https://github.com/allwefantasy/mlsql-pluins/tree/master/${module}',
 ${plugin_type_number},
-'${plugin_desc}',
+'',
 '${pluginInfoArray[0]}');
 EOF
 
