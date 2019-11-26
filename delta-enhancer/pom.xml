@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>delta-ehancer_${scala.binary.version}</artifactId>
+    <artifactId>delta-enhancer_${scala.binary.version}</artifactId>
     <dependencies>
         <dependency>
             <groupId>tech.mlsql</groupId>

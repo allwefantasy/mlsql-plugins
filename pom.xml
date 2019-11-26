@@ -10,7 +10,7 @@
     <version>0.1.0-SNAPSHOT</version>
     <modules>
         <module>binlog2delta</module>
-        <module>delta-ehancer</module>
+        <module>delta-enhancer</module>
         <module>stream-boostrap-at-startup</module>
         <module>last-command</module>
         <module>run-script</module>
@@ -67,7 +67,7 @@
         <hadoop-client-version>2.6.5</hadoop-client-version>
         <mlsql.version>1.5.0-SNAPSHOT</mlsql.version>
         <spark.binary.version>2.4</spark.binary.version>
-        <delta-plus.version>0.1.4</delta-plus.version>
+        <delta-plus.version>0.2.0-SNAPSHOT</delta-plus.version>
     </properties>
 
     <dependencies>

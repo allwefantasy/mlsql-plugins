@@ -1,7 +1,7 @@
 ## Install command:
 
 ```
-!plugin et add tech.mlsql.plugin.et.DeltaCommand delta_enhancer
+!plugin et add tech.mlsql.plugin.et.DeltaCommand delta-enhancer
 named deltaEnhancer; 
 ```
 
