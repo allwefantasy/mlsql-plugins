@@ -106,6 +106,12 @@
             "required": true
           },
           {
+            "name": "dbPrefix",
+            "form_type": "input",
+            "desc": "db prefix",
+            "required": true
+          },
+          {
             "name": "checkpointLocation",
             "form_type": "input",
             "desc": "checkpointLocation",

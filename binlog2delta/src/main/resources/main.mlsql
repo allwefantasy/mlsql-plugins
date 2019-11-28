@@ -16,6 +16,8 @@ set idCols="id"  where  type="defaultParam";
 set duration="10"  where  type="defaultParam";
 set checkpointLocation="/tmp/ck-binlog2delta"  where  type="defaultParam";
 
+set dbPrefix="mysql"  where  type="defaultParam";
+
 
 load binlog.`` where
 host="${host}"
@@ -30,8 +32,9 @@ and tableNamePattern="${tableNamePattern}"
 as binlogTable;
 
 save append binlogTable
-as binlogRate.`${deltaTableHome}/{db}/{table}`
+as rate.`${dbPrefix}_{db}.{table}`
 options mode="Append"
 and idCols="${idCols}"
+and syncType="binlog"
 and duration="${duration}"
 and checkpointLocation="${checkpointLocation}";
