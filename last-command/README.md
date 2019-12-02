@@ -1,8 +1,3 @@
-## Install command:
-
-```
-!plugin et add tech.mlsql.plugins.et.LastCommand last_command named last_command;
-```
 
 ## Install
 
