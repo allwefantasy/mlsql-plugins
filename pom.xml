@@ -16,6 +16,7 @@
         <module>run-script</module>
         <module>echo-controller</module>
         <module>table-repartition</module>
+        <module>ds-hbase-2x</module>
     </modules>
     <name>MLSQL Plugins</name>
     <url>https://github.com/allwefantasy/mlsql-plugins.git</url>
