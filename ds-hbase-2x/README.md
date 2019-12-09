@@ -22,10 +22,10 @@ sc.parallelize(data).toDF.write
     "outputTableName" -> cat,
     "family" -> family
   ) ++ options)
-  .format("org.apache.spark.sql.execution.datasources.hbase")
+  .format("org.apache.spark.sql.execution.datasources.hbase2x")
   .save()
   
-val df = spark.read.format("org.apache.spark.sql.execution.datasources.hbase").options(
+val df = spark.read.format("org.apache.spark.sql.execution.datasources.hbase2x").options(
   Map(
     "inputTableName" -> tableName,
     "family" -> familyName,
@@ -44,18 +44,26 @@ val df = spark.read.format("org.apache.spark.sql.execution.datasources.hbase").o
 MLSQL: 
 
 ```sql
-connect hbase where `zk`="127.0.0.1:2181"
+set rawText='''
+{"id":9,"content":"Spark好的语言1","label":0.0}
+{"id":10,"content":"MLSQL是一个好的语言7","label":0.0}
+{"id":12,"content":"MLSQL是一个好的语言7","label":0.0}
+''';
+
+load jsonStr.`rawText` as orginal_text_corpus;
+
+select cast(id as String)  as rowkey,content,label from orginal_text_corpus as orginal_text_corpus1;
+
+connect hbase2x where `zk`="127.0.0.1:2181"
 and `family`="cf" as hbase1;
 
-load hbase.`hbase1:mlsql_example`
-as mlsql_example;
+save overwrite orginal_text_corpus1 
+as hbase2x.`hbase1:mlsql_example`;
+
+load hbase2x.`hbase1:mlsql_example` where field.type.label="DoubleType"
+as mlsql_example ;
 
 select * from mlsql_example as show_data;
-
-
-select '2' as rowkey, 'insert test data' as name as insert_table;
-
-save insert_table as hbase.`hbase1:mlsql_example`;
 ```
 
 You should configure parameters like `zookeeper.znode.parent`,`hbase.rootdir` according by 
