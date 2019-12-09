@@ -1,7 +1,7 @@
 ## Install
 
 ```
-!plugin et add tech.mlsql.plugins.ds.MLSQLHBase2x ds-hbase-2x;
+!plugin ds add tech.mlsql.plugins.ds.MLSQLHBase2x ds-hbase-2x;
 ```
 
 ## Usage

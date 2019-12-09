@@ -44,7 +44,7 @@ class DefaultSource extends RelationProvider with CreatableRelationProvider with
   override def createRelation(sqlContext: SQLContext, parameters: Map[String, String]): BaseRelation =
     HBaseRelation(parameters, None)(sqlContext)
 
-  override def shortName(): String = "hbase"
+  override def shortName(): String = "hbase2x"
 
   override def createRelation(sqlContext: SQLContext, mode: SaveMode, parameters: Map[String, String], data: DataFrame): BaseRelation = {
     val relation = InsertHBaseRelation(data, parameters)(sqlContext)

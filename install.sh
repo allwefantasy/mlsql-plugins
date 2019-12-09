@@ -12,6 +12,9 @@ echo "Please specify module type"
 exit -1
 fi
 
+export package_params=${3:-""}
+
+
 export plugin_type_number="0"
 
 if [[ ${plugin_type} == "et" ]];then
@@ -31,7 +34,7 @@ plugin_jar="${module}_${scala_version}-${plugin_version}.jar"
 
 repo_location_prefix="/data/mlsql/store/repo/repo/plugins/download"
 
-mvn -DskipTests clean install -pl ${module} && scp ${module}/target/${plugin_jar} mlsql-official:${repo_location_prefix}
+mvn -DskipTests ${package_params} clean install -pl ${module} && scp ${module}/target/${plugin_jar} mlsql-official:${repo_location_prefix}
 
 ## read config file
 

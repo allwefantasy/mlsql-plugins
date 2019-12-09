@@ -5,17 +5,24 @@ import streaming.core.datasource._
 import streaming.dsl.mmlib.algs.param.{BaseParams, WowParams}
 import streaming.dsl.{ConnectMeta, DBMappingKey}
 import org.apache.spark.sql._
+import tech.mlsql.version.VersionCompatibility
 
 /**
  * Created by latincross on 12/29/2018.
  */
-class MLSQLHBase2x(override val uid: String) extends MLSQLSource with MLSQLSink with MLSQLSourceInfo with MLSQLRegistry with WowParams {
+class MLSQLHBase2x(override val uid: String)
+  extends MLSQLSource
+    with MLSQLSink
+    with MLSQLSourceInfo
+    with MLSQLRegistry
+    with VersionCompatibility
+    with WowParams {
   def this() = this(BaseParams.randomUID())
 
 
   override def fullFormat: String = "org.apache.spark.sql.execution.datasources.hbase2x"
 
-  override def shortFormat: String = "hbase"
+  override def shortFormat: String = "hbase2x"
 
   override def dbSplitter: String = ":"
 
@@ -127,4 +134,8 @@ class MLSQLHBase2x(override val uid: String) extends MLSQLSource with MLSQLSink 
 
   final val zk: Param[String] = new Param[String](this, "zk", "zk address")
   final val family: Param[String] = new Param[String](this, "family", "default cf")
+
+  override def supportedVersions: Seq[String] = {
+    Seq("1.5.0-SNAPSHOT", "1.5.0")
+  }
 }
