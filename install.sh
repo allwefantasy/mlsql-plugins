@@ -59,7 +59,7 @@ VALUES
 '${plugin_version}',
 '1.5.0,1.5.0-SNAPSHOT',
 0,
-'https://github.com/allwefantasy/mlsql-pluins/tree/master/${module}',
+'https://github.com/allwefantasy/mlsql-plugins/tree/master/${module}',
 ${plugin_type_number},
 '',
 '${pluginInfoArray[0]}');

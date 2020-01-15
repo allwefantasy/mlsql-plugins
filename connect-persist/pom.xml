@@ -9,6 +9,6 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>stream-boostrap-at-startup_${scala.binary.version}</artifactId>
+    <artifactId>connect-persist_${scala.binary.version}</artifactId>
 
 </project>

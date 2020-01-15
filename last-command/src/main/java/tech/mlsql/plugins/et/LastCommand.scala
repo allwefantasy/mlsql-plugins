@@ -34,7 +34,7 @@ class LastCommand(override val uid: String) extends SQLAlg with VersionCompatibi
 
 
   override def supportedVersions: Seq[String] = {
-    Seq("1.5.0-SNAPSHOT", "1.5.0")
+    Seq("1.5.0-SNAPSHOT", "1.5.0", "1.6.0-SNAPSHOT", "1.6.0")
   }
 
 

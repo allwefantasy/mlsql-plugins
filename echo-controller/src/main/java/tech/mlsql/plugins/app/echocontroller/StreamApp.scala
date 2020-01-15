@@ -13,7 +13,7 @@ class StreamApp extends tech.mlsql.app.App with VersionCompatibility {
     AppRuntimeStore.store.registerController("echo", classOf[EchoController].getName)
   }
 
-  override def supportedVersions: Seq[String] = Seq("1.5.0-SNAPSHOT", "1.5.0")
+  override def supportedVersions: Seq[String] = Seq("1.5.0-SNAPSHOT", "1.5.0", "1.6.0-SNAPSHOT", "1.6.0")
 }
 
 class EchoController extends CustomController {

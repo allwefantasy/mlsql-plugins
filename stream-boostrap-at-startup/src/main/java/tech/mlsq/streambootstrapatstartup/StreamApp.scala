@@ -1,8 +1,8 @@
 package tech.mlsq.streambootstrapatstartup
 
+import _root_.streaming.core.strategy.platform.{PlatformManager, SparkRuntime}
+import _root_.streaming.dsl.{MLSQLExecuteContext, ScriptSQLExec, ScriptSQLExecListener}
 import org.apache.spark.sql.SparkSession
-import streaming.core.strategy.platform.{PlatformManager, SparkRuntime}
-import streaming.dsl.{MLSQLExecuteContext, ScriptSQLExec, ScriptSQLExecListener}
 import tech.mlsql.ets.{SchedulerCommand, ScriptRunner}
 import tech.mlsql.job.{JobManager, MLSQLJobType}
 import tech.mlsql.version.VersionCompatibility
@@ -47,7 +47,7 @@ class StreamApp extends tech.mlsql.app.App with VersionCompatibility {
   }
 
   override def supportedVersions: Seq[String] = {
-    Seq("1.5.0-SNAPSHOT", "1.5.0")
+    Seq("1.5.0-SNAPSHOT", "1.5.0", "1.6.0-SNAPSHOT", "1.6.0")
   }
 }
 

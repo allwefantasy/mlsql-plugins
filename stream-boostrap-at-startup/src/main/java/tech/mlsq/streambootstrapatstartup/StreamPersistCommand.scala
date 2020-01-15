@@ -3,10 +3,10 @@ package tech.mlsq.streambootstrapatstartup
 import org.apache.spark.sql.expressions.UserDefinedFunction
 import org.apache.spark.sql.mlsql.session.MLSQLException
 import org.apache.spark.sql.{DataFrame, SparkSession}
-import streaming.dsl.ScriptSQLExec
-import streaming.dsl.mmlib.SQLAlg
-import streaming.dsl.mmlib.algs.Functions
-import streaming.dsl.mmlib.algs.param.{BaseParams, WowParams}
+import _root_.streaming.dsl.ScriptSQLExec
+import _root_.streaming.dsl.mmlib.SQLAlg
+import _root_.streaming.dsl.mmlib.algs.Functions
+import _root_.streaming.dsl.mmlib.algs.param.{BaseParams, WowParams}
 import tech.mlsql.common.utils.serder.json.JSONTool
 import tech.mlsql.datalake.DataLake
 import tech.mlsql.ets.SchedulerCommand
@@ -43,7 +43,7 @@ class StreamPersistCommand(override val uid: String) extends SQLAlg with Version
 
 
   override def supportedVersions: Seq[String] = {
-    Seq("1.5.0-SNAPSHOT", "1.5.0")
+    Seq("1.5.0-SNAPSHOT", "1.5.0", "1.6.0-SNAPSHOT", "1.6.0")
   }
 
   override def batchPredict(df: DataFrame, path: String, params: Map[String, String]): DataFrame = train(df, path, params)

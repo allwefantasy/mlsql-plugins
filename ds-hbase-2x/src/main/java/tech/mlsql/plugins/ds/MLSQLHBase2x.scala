@@ -136,6 +136,6 @@ class MLSQLHBase2x(override val uid: String)
   final val family: Param[String] = new Param[String](this, "family", "default cf")
 
   override def supportedVersions: Seq[String] = {
-    Seq("1.5.0-SNAPSHOT", "1.5.0")
+    Seq("1.5.0-SNAPSHOT", "1.5.0", "1.6.0-SNAPSHOT", "1.6.0")
   }
 }

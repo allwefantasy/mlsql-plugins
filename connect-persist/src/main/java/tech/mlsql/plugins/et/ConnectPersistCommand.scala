@@ -1,36 +1,37 @@
 package tech.mlsql.plugins.et
 
+import java.util.concurrent.ConcurrentHashMap
+
 import org.apache.spark.sql.expressions.UserDefinedFunction
-import org.apache.spark.sql.{DataFrame, SaveMode, SparkSession}
-import streaming.core.datasource.impl.MLSQLDelta
-import streaming.core.datasource.{DataSinkConfig, DataSourceConfig}
+import org.apache.spark.sql.{DataFrame, SparkSession}
+import streaming.dsl.DBMappingKey
 import streaming.dsl.auth.TableAuthResult
 import streaming.dsl.mmlib._
 import streaming.dsl.mmlib.algs.Functions
 import streaming.dsl.mmlib.algs.param.{BaseParams, WowParams}
-import tech.mlsql.common.utils.serder.json.JSONTool
+import tech.mlsql.common.utils.lang.sc.ScalaReflect
 import tech.mlsql.dsl.auth.ETAuth
 import tech.mlsql.dsl.auth.dsl.mmlib.ETMethod.ETMethod
+import tech.mlsql.ets.SchedulerCommand
 import tech.mlsql.version.VersionCompatibility
 
+import scala.collection.JavaConverters._
+
 /**
- * 13/1/2020 WilliamZhu(allwefantasy@gmail.com)
+ * 15/1/2020 WilliamZhu(allwefantasy@gmail.com)
  */
-class SaveThenLoad(override val uid: String) extends SQLAlg with VersionCompatibility with Functions with WowParams with ETAuth {
+class ConnectPersistCommand(override val uid: String) extends SQLAlg with VersionCompatibility with Functions with WowParams with ETAuth {
   def this() = this(BaseParams.randomUID())
 
+
   override def train(df: DataFrame, path: String, params: Map[String, String]): DataFrame = {
-    val command = JSONTool.parseJson[List[String]](params("parameters")).toArray
     val session = df.sparkSession
-    command match {
-      case Array(tableName) =>
-        val ds = new MLSQLDelta()
-        ds.save(session.table(tableName).write, DataSinkConfig(s"__tmp__.${tableName}", Map(), SaveMode.Overwrite, Option(df)))
-        val newDF = ds.load(session.read, DataSourceConfig(s"__tmp__.${tableName}", Map(), Option(df)))
-        newDF.createOrReplaceTempView(tableName)
-        newDF
-      case _ => throw new RuntimeException("!saveThenLoad tableName;")
-    }
+    val dbMapping = ScalaReflect.fromObjectStr("streaming.dsl.ConnectMeta").field("dbMapping").invoke().asInstanceOf[ConcurrentHashMap[DBMappingKey, Map[String, String]]]
+    val items = dbMapping.asScala.toList.map(f => ConnectMetaItem(f._1.format, f._1.db, f._2))
+    import session.implicits._
+    val newdf = session.createDataset[ConnectMetaItem](items).toDF()
+    SchedulerCommand.saveTable(session, newdf, ConnectPersistMeta.connectTableName, Option("format,db"), false)
+    newdf
   }
 
   override def auth(etMethod: ETMethod, path: String, params: Map[String, String]): List[TableAuthResult] = {
@@ -62,5 +63,10 @@ class SaveThenLoad(override val uid: String) extends SQLAlg with VersionCompatib
 
   override def predict(sparkSession: SparkSession, _model: Any, name: String, params: Map[String, String]): UserDefinedFunction = ???
 
-
 }
+
+object ConnectPersistMeta {
+  def connectTableName = "__mlsql__.connect_table"
+}
+
+case class ConnectMetaItem(format: String, db: String, options: Map[String, String])
