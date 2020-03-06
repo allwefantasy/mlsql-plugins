@@ -2,7 +2,7 @@
 
 ```
 !plugin app add - 'connect-persist-app';
-!plugin et add - 'connect-persist-command' named connectPersist;
+!plugin et add - 'connect-persist' named connectPersist;
 ```
 
 The first plugin is APP plugin and the second is ET plugin.

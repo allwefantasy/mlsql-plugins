@@ -12,7 +12,7 @@ import streaming.dsl.mmlib.algs.param.{BaseParams, WowParams}
 import tech.mlsql.common.utils.lang.sc.ScalaReflect
 import tech.mlsql.dsl.auth.ETAuth
 import tech.mlsql.dsl.auth.dsl.mmlib.ETMethod.ETMethod
-import tech.mlsql.ets.SchedulerCommand
+import tech.mlsql.plugins.app.ConnectPersistApp
 import tech.mlsql.version.VersionCompatibility
 
 import scala.collection.JavaConverters._
@@ -30,7 +30,7 @@ class ConnectPersistCommand(override val uid: String) extends SQLAlg with Versio
     val items = dbMapping.asScala.toList.map(f => ConnectMetaItem(f._1.format, f._1.db, f._2))
     import session.implicits._
     val newdf = session.createDataset[ConnectMetaItem](items).toDF()
-    SchedulerCommand.saveTable(session, newdf, ConnectPersistMeta.connectTableName, Option("format,db"), false)
+    ConnectPersistApp.saveTable(session, newdf, ConnectPersistMeta.connectTableName, Option("format,db"), false)
     newdf
   }
 
