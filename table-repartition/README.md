@@ -1,7 +1,7 @@
 ## Install 
 
 ```sql
-!plugin et add tech.mlsql.plugins.et.TableRepartition "table-repartition";
+!plugin et add - "table-repartition";
 ```
 
 ## Usage

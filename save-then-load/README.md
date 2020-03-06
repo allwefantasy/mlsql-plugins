@@ -1,7 +1,7 @@
 ## Install 
 
 ```sql
-!plugin et add tech.mlsql.plugins.et.SaveThenLoad "save-then-load" named saveThenLoad;
+!plugin et add - "save-then-load" named saveThenLoad;
 ```
 
 ## Usage

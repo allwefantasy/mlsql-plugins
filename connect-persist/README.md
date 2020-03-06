@@ -1,8 +1,8 @@
 ## Install command:
 
 ```
-!plugin app add tech.mlsql.plugins.app.ConnectPersistApp 'connect-persist-app';
-!plugin et add tech.mlsql.plugins.et.ConnectPersistCommand 'connect-persist-command' named connectPersist;
+!plugin app add - 'connect-persist-app';
+!plugin et add - 'connect-persist-command' named connectPersist;
 ```
 
 The first plugin is APP plugin and the second is ET plugin.

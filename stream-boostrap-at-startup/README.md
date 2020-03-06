@@ -1,8 +1,8 @@
 ## Install command:
 
 ```
-!plugin app add tech.mlsq.streambootstrapatstartup.StreamApp stream-boostrap-at-startup;
-!plugin et add tech.mlsq.streambootstrapatstartup.StreamPersistCommand et-stream-boostrap-at-startup named streambootstrapatstartup;
+!plugin app add - stream-boostrap-at-startup;
+!plugin et add - et-stream-boostrap-at-startup named streambootstrapatstartup;
 
 ```
 

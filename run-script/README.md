@@ -1,7 +1,7 @@
 ## Install 
 
 ```sql
-!plugin et add tech.mlsql.plugins.et.RunScript "run-script" named runScript;
+!plugin et add - "run-script" named runScript;
 ```
 
 ## Usage

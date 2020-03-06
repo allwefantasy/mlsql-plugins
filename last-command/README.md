@@ -1,7 +1,7 @@
 ## Install
 
 ```
-!plugin et add tech.mlsql.plugins.et.LastCommand last-command named lastCommand;
+!plugin et add - last-command named lastCommand;
 ```
 
 ## Help
