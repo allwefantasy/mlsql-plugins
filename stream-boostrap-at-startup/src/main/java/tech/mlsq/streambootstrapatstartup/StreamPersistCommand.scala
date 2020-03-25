@@ -9,7 +9,6 @@ import _root_.streaming.dsl.mmlib.algs.Functions
 import _root_.streaming.dsl.mmlib.algs.param.{BaseParams, WowParams}
 import tech.mlsql.common.utils.serder.json.JSONTool
 import tech.mlsql.datalake.DataLake
-import tech.mlsql.ets.SchedulerCommand
 import tech.mlsql.job.JobManager
 import tech.mlsql.version.VersionCompatibility
 
@@ -23,7 +22,7 @@ class StreamPersistCommand(override val uid: String) extends SQLAlg with Version
     val spark = df.sparkSession
     val dataLake = new DataLake(spark)
     require(dataLake.isEnable, "data lake should be enabled.")
-    import SchedulerCommand._
+    import StreamApp._
     import spark.implicits._
 
     val command = JSONTool.parseJson[List[String]](params("parameters"))

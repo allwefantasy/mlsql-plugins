@@ -7,6 +7,9 @@
 
 The first plugin is APP plugin and the second is ET plugin.
 
+> Notice:
+> If you set MLSQL meta store as MySQL, you should import db.sql file into  
+> your meta database.
 
 ## Usage
 

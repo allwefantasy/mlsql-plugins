@@ -1,8 +1,8 @@
 ## Install command:
 
 ```
-!plugin app add - stream-boostrap-at-startup-app;
-!plugin et add - stream-boostrap-at-startup named startup;
+!plugin app add - "stream-boostrap-at-startup-app";
+!plugin et add - "stream-boostrap-at-startup" named startup;
 
 ```
 
