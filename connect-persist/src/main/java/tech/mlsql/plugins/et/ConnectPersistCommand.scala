@@ -4,11 +4,12 @@ import java.util.concurrent.ConcurrentHashMap
 
 import org.apache.spark.sql.expressions.UserDefinedFunction
 import org.apache.spark.sql.{DataFrame, SparkSession}
-import streaming.dsl.DBMappingKey
+import streaming.dsl.{ConnectMeta, DBMappingKey}
 import streaming.dsl.auth.TableAuthResult
 import streaming.dsl.mmlib._
 import streaming.dsl.mmlib.algs.Functions
 import streaming.dsl.mmlib.algs.param.{BaseParams, WowParams}
+import tech.mlsql.common.utils.classloader.ClassLoaderTool
 import tech.mlsql.common.utils.lang.sc.ScalaReflect
 import tech.mlsql.dsl.auth.ETAuth
 import tech.mlsql.dsl.auth.dsl.mmlib.ETMethod.ETMethod
@@ -26,8 +27,8 @@ class ConnectPersistCommand(override val uid: String) extends SQLAlg with Versio
 
   override def train(df: DataFrame, path: String, params: Map[String, String]): DataFrame = {
     val session = df.sparkSession
-    val dbMapping = ScalaReflect.fromObjectStr("streaming.dsl.ConnectMeta").field("dbMapping").invoke().asInstanceOf[ConcurrentHashMap[DBMappingKey, Map[String, String]]]
-    val items = dbMapping.asScala.toList.map(f => ConnectMetaItem(f._1.format, f._1.db, f._2))
+    val dbMapping = ConnectMeta.toMap
+    val items = dbMapping.toList.map(f => ConnectMetaItem(f._1.format, f._1.db, f._2))
     import session.implicits._
     val newdf = session.createDataset[ConnectMetaItem](items).toDF()
     DBStore.store.saveTable(session, newdf, ConnectPersistMeta.connectTableName, Option("format,db"), false)
