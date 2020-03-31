@@ -4,7 +4,8 @@ import _root_.streaming.dsl.ScriptSQLExec
 import _root_.streaming.dsl.mmlib.SQLAlg
 import _root_.streaming.dsl.mmlib.algs.Functions
 import _root_.streaming.dsl.mmlib.algs.param.{BaseParams, WowParams}
-import org.apache.spark.sql.DataFrame
+import org.apache.spark.sql.expressions.UserDefinedFunction
+import org.apache.spark.sql.{DataFrame, SparkSession}
 import org.apache.spark.sql.mlsql.session.MLSQLException
 import tech.mlsql.common.utils.serder.json.JSONTool
 import tech.mlsql.datalake.DataLake
