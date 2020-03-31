@@ -3,6 +3,7 @@ package tech.mlsq.streambootstrapatstartup
 import _root_.streaming.core.strategy.platform.{PlatformManager, SparkRuntime}
 import _root_.streaming.dsl.{MLSQLExecuteContext, ScriptSQLExec, ScriptSQLExecListener}
 import org.apache.spark.sql.SparkSession
+import tech.mlsql.common.utils.log.Logging
 import tech.mlsql.ets.ScriptRunner
 import tech.mlsql.job.{JobManager, MLSQLJobType}
 import tech.mlsql.store.DBStore
@@ -11,22 +12,31 @@ import tech.mlsql.version.VersionCompatibility
 /**
  * 2019-09-20 WilliamZhu(allwefantasy@gmail.com)
  */
-class StreamApp extends tech.mlsql.app.App with VersionCompatibility {
+class StreamApp extends tech.mlsql.app.App with VersionCompatibility with Logging {
 
 
   override def run(args: Seq[String]): Unit = {
     val root = runtime.sparkSession
     import root.implicits._
+    val thread = new Thread("start MLSQL stream") {
+      override def run(): Unit = {
+        while (!PlatformManager.RUNTIME_IS_READY.get()) {
+          Thread.sleep(3000)
+          logInfo("Waiting MLSQL runtime ready to start streams.")
+        }
+        val streams = DBStore.store.tryReadTable(root, StreamAppConfig.TABLE, () => root.createDataset[Stream](Seq()).toDF())
+        streams.as[Stream].collect().foreach { stream =>
+          val session = getSessionByOwner(stream.owner)
+          val job = JobManager.getJobInfo(stream.owner, stream.name, MLSQLJobType.STREAM, stream.content, -1)
+          setUpScriptSQLExecListener(stream.owner, session, job.groupId, stream.home)
+          ScriptRunner.runJob(stream.content, job, (df) => {
 
-    val streams = DBStore.store.tryReadTable(root, StreamAppConfig.TABLE, () => root.createDataset[Stream](Seq()).toDF())
-    streams.as[Stream].collect().foreach { stream =>
-      val session = getSessionByOwner(stream.owner)
-      val job = JobManager.getJobInfo(stream.owner, stream.name, MLSQLJobType.STREAM, stream.content, -1)
-      setUpScriptSQLExecListener(stream.owner, session, job.groupId, stream.home)
-      ScriptRunner.runJob(stream.content, job, (df) => {
-
-      })
+          })
+        }
+      }
     }
+    thread.start()
+
   }
 
   def setUpScriptSQLExecListener(owner: String, sparkSession: SparkSession, groupId: String, home: String) = {
