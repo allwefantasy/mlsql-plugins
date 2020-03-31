@@ -1,8 +1,8 @@
 ## Install command:
 
 ```
-!plugin app add - "stream-boostrap-at-startup-app";
-!plugin et add - "stream-boostrap-at-startup" named startup;
+!plugin app add - "stream-persist-app";
+!plugin et add - "stream-persist" named streamPersist;
 
 ```
 
@@ -14,7 +14,11 @@ The first plugin is APP plugin and the second is ET plugin.
 Use ET Plugin to persist stream job.
 
 ```sql
-!startup persist streamExample;
+!streamPersist persist streamExample;
+
+!streamPersist remove streamExample;
+
+!streamPersist list;
 ```
 
 And then once MLSQL Engine is restarted, and the stream job streamExample will be 

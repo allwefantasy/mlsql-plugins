@@ -11,7 +11,7 @@
     <modules>
         <module>binlog2delta</module>
         <module>delta-enhancer</module>
-        <module>stream-boostrap-at-startup</module>
+        <module>stream-persist</module>
         <module>last-command</module>
         <module>run-script</module>
         <module>echo-controller</module>
@@ -116,7 +116,7 @@
             <version>${spark.version}</version>
             <scope>provided</scope>
         </dependency>
-        
+
         <dependency>
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-catalyst_${scala.binary.version}</artifactId>
@@ -130,8 +130,8 @@
             <version>${spark.version}</version>
             <scope>provided</scope>
         </dependency>
-        
-        
+
+
     </dependencies>
 
     <profiles>

@@ -1,4 +1,4 @@
-moduleName=stream-boostrap-at-startup
+moduleName=stream-persist
 mainClass=tech.mlsq.streambootstrapatstartup.StreamPersistCommand
 version=0.1.0-SNAPSHOT
 author=allwefantasy
@@ -10,7 +10,7 @@ desc=wow
 
 __SPLITTER__
 
-moduleName=stream-boostrap-at-startup-app
+moduleName=stream-persist-app
 mainClass=tech.mlsq.streambootstrapatstartup.StreamApp
 version=0.1.0-SNAPSHOT
 author=allwefantasy
