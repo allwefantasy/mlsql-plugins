@@ -24,6 +24,7 @@ class StreamApp extends tech.mlsql.app.App with VersionCompatibility with Loggin
           Thread.sleep(3000)
           logInfo("Waiting MLSQL runtime ready to start streams.")
         }
+        logInfo("Starting to start streams.")
         val streams = DBStore.store.tryReadTable(root, StreamAppConfig.TABLE, () => root.createDataset[Stream](Seq()).toDF())
         streams.as[Stream].collect().foreach { stream =>
           val session = getSessionByOwner(stream.owner)
