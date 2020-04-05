@@ -32,22 +32,22 @@
                     <groupId>javax.servlet</groupId>
                     <artifactId>javax.servlet-api</artifactId>
                 </exclusion>
-                <exclusion>
-                    <groupId>org.scala-lang</groupId>
-                    <artifactId>scala-compiler</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.scala-lang</groupId>
-                    <artifactId>scala-reflect</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.scala-lang</groupId>
-                    <artifactId>jline</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.scala-lang</groupId>
-                    <artifactId>scala-library</artifactId>
-                </exclusion>
+<!--                <exclusion>-->
+<!--                    <groupId>org.scala-lang</groupId>-->
+<!--                    <artifactId>scala-compiler</artifactId>-->
+<!--                </exclusion>-->
+<!--                <exclusion>-->
+<!--                    <groupId>org.scala-lang</groupId>-->
+<!--                    <artifactId>scala-reflect</artifactId>-->
+<!--                </exclusion>-->
+<!--                <exclusion>-->
+<!--                    <groupId>org.scala-lang</groupId>-->
+<!--                    <artifactId>jline</artifactId>-->
+<!--                </exclusion>-->
+<!--                <exclusion>-->
+<!--                    <groupId>org.scala-lang</groupId>-->
+<!--                    <artifactId>scala-library</artifactId>-->
+<!--                </exclusion>-->
             </exclusions>
         </dependency>
     </dependencies>

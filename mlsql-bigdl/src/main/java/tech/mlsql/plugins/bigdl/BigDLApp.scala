@@ -6,7 +6,7 @@ import tech.mlsql.version.VersionCompatibility
 /**
  * 5/4/2020 WilliamZhu(allwefantasy@gmail.com)
  */
-class DigDLApp extends tech.mlsql.app.App with VersionCompatibility {
+class BigDLApp extends tech.mlsql.app.App with VersionCompatibility {
   override def run(args: Seq[String]): Unit = {
     ETRegister.register("ImageLoader", classOf[SQLImageLoaderExt].getName)
     ETRegister.register("MnistLoader", classOf[SQLMnistLoaderExt].getName)
