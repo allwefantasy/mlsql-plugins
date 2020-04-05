@@ -8,10 +8,10 @@ import tech.mlsql.version.VersionCompatibility
  */
 class BigDLApp extends tech.mlsql.app.App with VersionCompatibility {
   override def run(args: Seq[String]): Unit = {
-    ETRegister.register("ImageLoader", classOf[SQLImageLoaderExt].getName)
-    ETRegister.register("MnistLoader", classOf[SQLMnistLoaderExt].getName)
-    ETRegister.register("BigDLClassify", classOf[SQLBigDLClassifyExt].getName)
-    ETRegister.register("LeNet5", classOf[SQLLeNet5Ext].getName)
+    ETRegister.register("ImageLoaderExt", classOf[SQLImageLoaderExt].getName)
+    ETRegister.register("MnistLoaderExt", classOf[SQLMnistLoaderExt].getName)
+    ETRegister.register("BigDLClassifyExt", classOf[SQLBigDLClassifyExt].getName)
+    ETRegister.register("LeNet5Ext", classOf[SQLLeNet5Ext].getName)
   }
 
   override def supportedVersions: Seq[String] = Seq("1.5.0-SNAPSHOT", "1.5.0", "1.6.0-SNAPSHOT", "1.6.0")
