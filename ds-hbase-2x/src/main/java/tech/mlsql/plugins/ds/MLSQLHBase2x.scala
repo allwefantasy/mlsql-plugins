@@ -10,7 +10,7 @@ import tech.mlsql.version.VersionCompatibility
 /**
  * Created by latincross on 12/29/2018.
  */
-class MLSQLHBase2x(override val uid: String)
+class MLSQLExcel(override val uid: String)
   extends MLSQLSource
     with MLSQLSink
     with MLSQLSourceInfo
@@ -20,9 +20,9 @@ class MLSQLHBase2x(override val uid: String)
   def this() = this(BaseParams.randomUID())
 
 
-  override def fullFormat: String = "org.apache.spark.sql.execution.datasources.hbase2x"
+  override def fullFormat: String = "tech.mlsql.plugins.ds"
 
-  override def shortFormat: String = "hbase2x"
+  override def shortFormat: String = "excel"
 
   override def dbSplitter: String = ":"
 
