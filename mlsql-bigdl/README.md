@@ -6,10 +6,7 @@
 
 ## Usage
 
-```sql
-
-```
-
+Check this [Doc](http://docs.mlsql.tech/zh/dl/load_image.html)
 
 
 
