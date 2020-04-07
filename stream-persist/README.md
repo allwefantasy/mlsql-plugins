@@ -2,8 +2,6 @@
 
 ```
 !plugin app add - "stream-persist-app";
-!plugin et add - "stream-persist" named streamPersist;
-
 ```
 
 The first plugin is APP plugin and the second is ET plugin.

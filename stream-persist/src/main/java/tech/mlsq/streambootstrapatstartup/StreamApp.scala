@@ -4,7 +4,9 @@ import _root_.streaming.core.strategy.platform.{PlatformManager, SparkRuntime}
 import _root_.streaming.dsl.{MLSQLExecuteContext, ScriptSQLExec, ScriptSQLExecListener}
 import org.apache.spark.sql.SparkSession
 import tech.mlsql.common.utils.log.Logging
+import tech.mlsql.dsl.CommandCollection
 import tech.mlsql.ets.ScriptRunner
+import tech.mlsql.ets.register.ETRegister
 import tech.mlsql.job.{JobManager, MLSQLJobType}
 import tech.mlsql.store.DBStore
 import tech.mlsql.version.VersionCompatibility
@@ -18,6 +20,10 @@ class StreamApp extends tech.mlsql.app.App with VersionCompatibility with Loggin
   override def run(args: Seq[String]): Unit = {
     val root = runtime.sparkSession
     import root.implicits._
+
+    ETRegister.register("StreamPersistCommand", classOf[StreamPersistCommand].getName)
+    CommandCollection.refreshCommandMapping(Map("streamPersist" -> "StreamPersistCommand"))
+
     val thread = new Thread("start MLSQL stream") {
       override def run(): Unit = {
         while (!PlatformManager.RUNTIME_IS_READY.get()) {

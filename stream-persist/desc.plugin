@@ -1,15 +1,3 @@
-moduleName=stream-persist
-mainClass=tech.mlsq.streambootstrapatstartup.StreamPersistCommand
-version=0.1.0-SNAPSHOT
-author=allwefantasy
-mlsqlVersions="1.5.0,1.5.0-SNAPSHOT,1.6.0,1.6.0-SNAPSHOT"
-githubUrl=https://github.com/allwefantasy/mlsql-plugins/tree/master/stream-boostrap-at-startup
-scala_version=2.11
-mlsqlPluginType=et
-desc=wow
-
-__SPLITTER__
-
 moduleName=stream-persist-app
 mainClass=tech.mlsq.streambootstrapatstartup.StreamApp
 version=0.1.0-SNAPSHOT
