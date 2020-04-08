@@ -21,6 +21,7 @@
         <module>connect-persist</module>
         <module>mlsql-bigdl</module>
         <module>mlsql-excel</module>
+        <module>mlsql-udfs</module>
     </modules>
     <name>MLSQL Plugins</name>
     <url>https://github.com/allwefantasy/mlsql-plugins.git</url>
@@ -159,6 +160,15 @@
                 <spark.version>2.4.3</spark.version>
                 <spark.bigversion>2.4</spark.bigversion>
                 <spark.binary.version>2.4</spark.binary.version>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>spark-3.0</id>
+            <properties>
+                <spark.version>3.0.0-preview2</spark.version>
+                <spark.bigversion>3.0</spark.bigversion>
+                <spark.binary.version>3.0</spark.binary.version>
             </properties>
         </profile>
 
