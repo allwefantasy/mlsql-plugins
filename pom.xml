@@ -21,7 +21,6 @@
         <module>connect-persist</module>
         <module>mlsql-bigdl</module>
         <module>mlsql-excel</module>
-        <module>mlsql-udfs</module>
     </modules>
     <name>MLSQL Plugins</name>
     <url>https://github.com/allwefantasy/mlsql-plugins.git</url>
