@@ -9,13 +9,13 @@ import org.joda.time.format.DateTimeFormat
  */
 object DateUDF {
   def parseDateAsLong(uDFRegistration: UDFRegistration): Unit = {
-    uDFRegistration.register("parse_date", (date: String, pattern: String) => {
+    uDFRegistration.register("parseDateAsLong", (date: String, pattern: String) => {
       DateTime.parse(date, DateTimeFormat.forPattern(pattern)).getMillis
     })
   }
 
   def parseLongAsDate(uDFRegistration: UDFRegistration): Unit = {
-    uDFRegistration.register("parse_date", (date: Long, pattern: String) => {
+    uDFRegistration.register("parseLongAsDate", (date: Long, pattern: String) => {
       val dt = new DateTime().withMillis(date)
       dt.toString(pattern)
     })
