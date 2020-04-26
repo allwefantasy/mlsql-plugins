@@ -49,7 +49,11 @@ class ApproxQuantile(override val uid: String) extends SQLAlg with VersionCompat
     }
 
     import df.sparkSession.implicits._
-    df.sparkSession.createDataset[Double](Seq(res)).toDF("value")
+    val newdf = df.sparkSession.createDataset[Double](Seq(res)).toDF("value")
+    if (tableName != null) {
+      newdf.createOrReplaceTempView(tableName)
+    }
+    newdf
 
   }
 

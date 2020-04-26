@@ -10,7 +10,7 @@ import tech.mlsql.version.VersionCompatibility
 class AnalysisApp extends tech.mlsql.app.App with VersionCompatibility {
   override def run(args: Seq[String]): Unit = {
     ETRegister.register("ApproxQuantile", classOf[ApproxQuantile].getName)
-    CommandCollection.refreshCommandMapping(Map("ApproxQuantile" -> "approxQuantile"))
+    CommandCollection.refreshCommandMapping(Map("approxQuantile" -> "ApproxQuantile"))
   }
 
   override def supportedVersions: Seq[String] = Seq("1.5.0-SNAPSHOT", "1.5.0", "1.6.0-SNAPSHOT", "1.6.0")
