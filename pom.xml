@@ -21,7 +21,6 @@
         <module>connect-persist</module>
         <module>mlsql-bigdl</module>
         <module>mlsql-excel</module>
-        <module>mlsql-pip</module>
         <module>mlsql-analysis-toolkit</module>
     </modules>
     <name>MLSQL Plugins</name>
