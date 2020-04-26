@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>table-repartition_${scala.binary.version}</artifactId>
+    <artifactId>table-repartition-${spark.binary.version}_${scala.binary.version}</artifactId>
 
 
 </project>

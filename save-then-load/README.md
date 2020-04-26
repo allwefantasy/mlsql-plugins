@@ -1,7 +1,7 @@
 ## Install 
 
 ```sql
-!plugin et add - "save-then-load" named saveThenLoad;
+!plugin et add - "save-then-load-2.4" named saveThenLoad;
 ```
 
 ## Usage

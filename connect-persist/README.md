@@ -1,7 +1,7 @@
 ## Install command:
 
 ```
-!plugin app add - 'connect-persist-app';
+!plugin app add - 'connect-persist-app-2.4';
 ```
 
 The first plugin is APP plugin and the second is ET plugin.

@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>ds-hbase-2x_${scala.binary.version}</artifactId>
+    <artifactId>ds-hbase-2x-${spark.binary.version}_${scala.binary.version}</artifactId>
     <properties>
         <hbase.version>2.0.4</hbase.version>
     </properties>

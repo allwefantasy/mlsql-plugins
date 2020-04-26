@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>run-script_${scala.binary.version}</artifactId>
+    <artifactId>run-script-${spark.binary.version}_${scala.binary.version}</artifactId>
 
 
 </project>

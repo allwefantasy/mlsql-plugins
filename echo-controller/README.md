@@ -1,7 +1,7 @@
 ## Install 
 
 ```sql
-!plugin app add tech.mlsql.plugins.app.echocontroller.StreamApp echo-controller;
+!plugin app add - echo-controller-2.4;
 ```
 
 ## Usage

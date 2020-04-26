@@ -1,7 +1,7 @@
 ## Install 
 
 ```sql
-!plugin et add - "table-repartition";
+!plugin et add - "table-repartition-2.4";
 ```
 
 ## Usage

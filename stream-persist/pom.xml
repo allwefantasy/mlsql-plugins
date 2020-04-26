@@ -9,6 +9,6 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>stream-persist_${scala.binary.version}</artifactId>
+    <artifactId>stream-persist-${spark.binary.version}_${scala.binary.version}</artifactId>
 
 </project>

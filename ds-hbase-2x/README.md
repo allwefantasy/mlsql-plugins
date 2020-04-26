@@ -1,7 +1,7 @@
 ## Install
 
 ```
-!plugin ds add - ds-hbase-2x;
+!plugin ds add - ds-hbase-2x-2.4;
 ```
 
 ## Usage

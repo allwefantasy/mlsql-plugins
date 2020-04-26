@@ -1,7 +1,7 @@
 ## Install
 
 ```
-!plugin et add - last-command named lastCommand;
+!plugin et add - last-command-2.4 named lastCommand;
 ```
 
 ## Help

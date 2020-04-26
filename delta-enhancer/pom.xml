@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>delta-enhancer_${scala.binary.version}</artifactId>
+    <artifactId>delta-enhancer-${spark.binary.version}_${scala.binary.version}</artifactId>
     <dependencies>
         <dependency>
             <groupId>tech.mlsql</groupId>

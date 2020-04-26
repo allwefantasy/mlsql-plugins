@@ -1,7 +1,7 @@
 ## Install 
 
 ```sql
-!plugin et add - "run-script" named runScript;
+!plugin et add - "run-script-2.4" named runScript;
 ```
 
 ## Usage

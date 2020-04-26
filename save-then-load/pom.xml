@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>save-then-load_${scala.binary.version}</artifactId>
+    <artifactId>save-then-load-${spark.binary.version}_${scala.binary.version}</artifactId>
 
 
 </project>
