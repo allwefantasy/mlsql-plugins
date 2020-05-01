@@ -15,6 +15,11 @@ select ${time_quantile} as quantile as output;
 ```
 
 
+To create table with id column with fix size:
+
+ ```sql
+!dataframe build range 100000 named table1;
+```
 
 
 
