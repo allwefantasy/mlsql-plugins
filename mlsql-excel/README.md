@@ -4,6 +4,13 @@
 !plugin ds add - "mlsql-excel-2.4";
 ```
 
+or install as app:
+
+```
+tech.mlsql.plugins.ds.MLSQLApp
+```
+
+
 ## Usage
 
 ```sql

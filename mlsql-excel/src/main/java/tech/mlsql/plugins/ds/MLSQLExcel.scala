@@ -5,11 +5,34 @@ import _root_.streaming.dsl.ScriptSQLExec
 import _root_.streaming.dsl.mmlib.algs.param.{BaseParams, WowParams}
 import org.apache.spark.ml.param.Param
 import org.apache.spark.sql._
+import tech.mlsql.common.utils.classloader.ClassLoaderTool
+import tech.mlsql.common.utils.log.Logging
 import tech.mlsql.version.VersionCompatibility
 
-/**
- * 2019-02-19 WilliamZhu(allwefantasy@gmail.com)
- */
+class MLSQLExcelApp extends tech.mlsql.app.App with VersionCompatibility with Logging {
+
+
+  override def supportedVersions: Seq[String] = {
+    Seq("1.5.0-SNAPSHOT",
+      "1.5.0", "1.6.0-SNAPSHOT",
+      "1.6.0", "2.0.0",
+      "2.0.1",
+      "2.0.1-SNAPSHOT",
+      "2.0.1",
+      "2.1.0-SNAPSHOT"
+    )
+  }
+
+  override def run(args: Seq[String]): Unit = {
+    val clzz = "tech.mlsql.plugins.ds.MLSQLExcel"
+    logInfo(s"Load ds: ${clzz}")
+    val dataSource = ClassLoaderTool.classForName(clzz).newInstance()
+    if (dataSource.isInstanceOf[MLSQLRegistry]) {
+      dataSource.asInstanceOf[MLSQLRegistry].register()
+    }
+  }
+}
+
 class MLSQLExcel(override val uid: String)
   extends MLSQLBaseFileSource
     with WowParams with VersionCompatibility {
@@ -43,6 +66,6 @@ class MLSQLExcel(override val uid: String)
   final val sheetName: Param[String] = new Param[String](this, "sheetName", "Optional, For save excel")
 
   override def supportedVersions: Seq[String] = {
-    Seq("1.5.0-SNAPSHOT", "1.5.0", "1.6.0-SNAPSHOT", "1.6.0")
+    Seq("1.5.0-SNAPSHOT", "1.5.0", "1.6.0-SNAPSHOT", "1.6.0", "2.0.0", "2.0.1", "2.0.1-SNAPSHOT")
   }
 }
