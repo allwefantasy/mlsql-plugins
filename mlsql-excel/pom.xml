@@ -12,9 +12,19 @@
     <artifactId>mlsql-excel-${spark.binary.version}_${scala.binary.version}</artifactId>
     <dependencies>
         <dependency>
-            <groupId>com.crealytics</groupId>
-            <artifactId>spark-excel_${scala.binary.version}</artifactId>
-            <version>0.11.1</version>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>4.1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>4.1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.norbitltd</groupId>
+            <artifactId>spoiwo_${scala.binary.version}</artifactId>
+            <version>1.8.0</version>
             <exclusions>
                 <exclusion>
                     <groupId>com.fasterxml.jackson.core</groupId>
@@ -30,6 +40,67 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
+        <dependency>
+            <groupId>com.github.pjfanning</groupId>
+            <artifactId>excel-streaming-reader</artifactId>
+            <version>2.3.6</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.pjfanning</groupId>
+            <artifactId>poi-shared-strings</artifactId>
+            <version>1.0.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-compress</artifactId>
+            <version>1.20</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.typelevel</groupId>
+            <artifactId>cats-core_${scala.binary.version}</artifactId>
+            <version>2.0.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.scalatest</groupId>
+            <artifactId>scalatest_${scala.binary.version}</artifactId>
+            <version>3.2.3</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.scalatestplus</groupId>
+            <artifactId>scalatestplus-scalacheck_${scala.binary.version}</artifactId>
+            <version>3.1.0.0-RC2</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.scalacheck</groupId>
+            <artifactId>scalacheck_${scala.binary.version}</artifactId>
+            <version>1.15.2</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.alexarchambault</groupId>
+            <artifactId>scalacheck-shapeless_1.14_${scala.binary.version}</artifactId>
+            <version>1.2.5</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.scalamock</groupId>
+            <artifactId>scalamock-scalatest-support_${scala.binary.version}</artifactId>
+            <version>3.6.0</version>
+            <scope>test</scope>
+        </dependency>
+
+
     </dependencies>
 
     <profiles>
@@ -40,7 +111,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-shade-plugin</artifactId>
-                        <version>2.4.3</version>
+                        <version>3.2.0</version>
                         <configuration>
                             <filters>
                                 <filter>
@@ -53,7 +124,26 @@
                                 </filter>
                             </filters>
                             <createDependencyReducedPom>false</createDependencyReducedPom>
+                            <relocations>
+                                <relocation>
+                                    <pattern>org.apache.poi</pattern>
+                                    <shadedPattern>shadeio.poi</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>com.norbitltd.spoiwo</pattern>
+                                    <shadedPattern>shadeio.spoiwo</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>com.github.pjfanning</pattern>
+                                    <shadedPattern>shadeio.pjfanning</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>org.apache.commons.compress</pattern>
+                                    <shadedPattern>shadeio.commons.compress</shadedPattern>
+                                </relocation>
+                            </relocations>
                         </configuration>
+
                         <executions>
                             <execution>
                                 <phase>package</phase>

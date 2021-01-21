@@ -7,7 +7,7 @@
 or install as app:
 
 ```
-tech.mlsql.plugins.ds.MLSQLApp
+!plugin app add "tech.mlsql.plugins.ds.MLSQLApp" "mlsql-excel-2.4";
 ```
 
 
