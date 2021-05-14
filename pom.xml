@@ -71,7 +71,7 @@
         <serviceframework.version>2.0.5</serviceframework.version>
         <scope>provided</scope>
         <hadoop-client-version>2.6.5</hadoop-client-version>
-        <mlsql.version>1.6.0-SNAPSHOT</mlsql.version>
+        <mlsql.version>2.1.0-SNAPSHOT</mlsql.version>
         <delta-plus.version>0.2.0</delta-plus.version>
         <bigdl.version>0.8.0</bigdl.version>
     </properties>
@@ -138,6 +138,19 @@
     </dependencies>
 
     <profiles>
+
+        <profile>
+            <id>allow-snapshots</id>
+            <activation><activeByDefault>true</activeByDefault></activation>
+            <repositories>
+                <repository>
+                    <id>snapshots-repo</id>
+                    <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+                    <releases><enabled>false</enabled></releases>
+                    <snapshots><enabled>true</enabled></snapshots>
+                </repository>
+            </repositories>
+        </profile>
 
         <profile>
             <id>scala-2.11</id>
