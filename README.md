@@ -10,7 +10,7 @@ Requirements:
 1. Python >= 3.6
 2. Maven >= 3.0
 
-You can install mlsql_plugin_tool to build module in this project.
+You can install [mlsql_plugin_tool](https://github.com/allwefantasy/mlsql_plugin_tool) to build module in this project.
 
 Install command:
 
@@ -37,3 +37,4 @@ Once build success, the system will show message like fowllowing:
 Then you can install this jar in [MLSQL Engine](https://docs.mlsql.tech/mlsql-stack/plugin/offline_install.html)
 
 
+##
