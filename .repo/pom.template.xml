@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>tech.mlsql</groupId>
-    <artifactId>mlsql-plugins_{{spark_binary_version}}_{{scala_binary_version}}</artifactId>
+    <artifactId>mlsql-plugins_2.11</artifactId>
     <packaging>pom</packaging>
     <version>0.1.0-SNAPSHOT</version>
     <modules>
@@ -57,12 +57,12 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <scala.version>2.11.12</scala.version>
+        <scala.binary.version>2.11</scala.binary.version>
 
-        <scala.version>{{scala_version}}</scala.version>
-        <scala.binary.version>{{scala_binary_version}}</scala.binary.version>
-        <spark.version>{{spark_version}}</spark.version>
-        <spark.bigversion>{{spark_binary_version}}</spark.bigversion>
-        <spark.binary.version>{{spark_binary_version}}</spark.binary.version>
+        <spark.version>2.4.3</spark.version>
+        <spark.bigversion>2.4</spark.bigversion>
+        <spark.binary.version>2.4</spark.binary.version>
 
         <guava.version>16.0</guava.version>
         <httpclient.version>4.5.3</httpclient.version>
@@ -150,6 +150,39 @@
                     <snapshots><enabled>true</enabled></snapshots>
                 </repository>
             </repositories>
+        </profile>
+
+        <profile>
+            <id>scala-2.11</id>
+            <properties>
+                <scala.version>2.11.12</scala.version>
+                <scala.binary.version>2.11</scala.binary.version>
+            </properties>
+        </profile>
+        <profile>
+            <id>scala-2.12</id>
+            <properties>
+                <scala.version>2.12.12</scala.version>
+                <scala.binary.version>2.12</scala.binary.version>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>spark-2.4</id>
+            <properties>
+                <spark.version>2.4.3</spark.version>
+                <spark.bigversion>2.4</spark.bigversion>
+                <spark.binary.version>2.4</spark.binary.version>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>spark-3.0</id>
+            <properties>
+                <spark.version>3.0.0-preview2</spark.version>
+                <spark.bigversion>3.0</spark.bigversion>
+                <spark.binary.version>3.0</spark.binary.version>
+            </properties>
         </profile>
 
         <profile>
