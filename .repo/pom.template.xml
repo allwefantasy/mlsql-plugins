@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>tech.mlsql</groupId>
-    <artifactId>mlsql-plugins_2.11</artifactId>
+    <artifactId>mlsql-plugins-{{spark_binary_version}}_{{scala_binary_version}}</artifactId>
     <packaging>pom</packaging>
     <version>0.1.0-SNAPSHOT</version>
     <modules>
@@ -57,12 +57,12 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <scala.version>2.11.12</scala.version>
-        <scala.binary.version>2.11</scala.binary.version>
 
-        <spark.version>2.4.3</spark.version>
-        <spark.bigversion>2.4</spark.bigversion>
-        <spark.binary.version>2.4</spark.binary.version>
+        <scala.version>{{scala_version}}</scala.version>
+        <scala.binary.version>{{scala_binary_version}}</scala.binary.version>
+        <spark.version>{{spark_version}}</spark.version>
+        <spark.bigversion>{{spark_binary_version}}</spark.bigversion>
+        <spark.binary.version>{{spark_binary_version}}</spark.binary.version>
 
         <guava.version>16.0</guava.version>
         <httpclient.version>4.5.3</httpclient.version>
@@ -141,13 +141,19 @@
 
         <profile>
             <id>allow-snapshots</id>
-            <activation><activeByDefault>true</activeByDefault></activation>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
             <repositories>
                 <repository>
                     <id>snapshots-repo</id>
                     <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-                    <releases><enabled>false</enabled></releases>
-                    <snapshots><enabled>true</enabled></snapshots>
+                    <releases>
+                        <enabled>false</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
                 </repository>
             </repositories>
         </profile>
