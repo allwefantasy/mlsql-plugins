@@ -1,0 +1,10 @@
+moduleName=connect-persist-app-{{spark_binary_version}}
+mainClass=tech.mlsql.plugins.app.ConnectPersistApp
+scala_version={{scala_binary_version}}
+spark_version={{spark_binary_version}}
+version=0.1.0-SNAPSHOT
+author=allwefantasy
+mlsqlVersions="1.5.0,1.5.0-SNAPSHOT,1.6.0,1.6.0-SNAPSHOT"
+githubUrl=https://github.com/allwefantasy/mlsql-plugins/tree/master/stream-persist
+mlsqlPluginType=app
+desc=wow
