@@ -1,4 +1,4 @@
-package tech.mlsql.plugins.app.echocontroller
+package tech.mlsql.plugins.mllib.echocontroller
 
 import tech.mlsql.app.CustomController
 import tech.mlsql.common.utils.serder.json.JSONTool

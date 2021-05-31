@@ -1,4 +1,4 @@
-package tech.mlsql.plugins.app
+package tech.mlsql.plugins.mllib
 
 import _root_.streaming.core.strategy.platform.{PlatformManager, SparkRuntime}
 import _root_.streaming.dsl._

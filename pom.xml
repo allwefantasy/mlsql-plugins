@@ -22,6 +22,7 @@
         <module>mlsql-bigdl</module>
         <module>mlsql-excel</module>
         <module>mlsql-analysis-toolkit</module>
+        <module>mlsql-mllib</module>
     </modules>
     <name>MLSQL Plugins</name>
     <url>https://github.com/allwefantasy/mlsql-plugins.git</url>

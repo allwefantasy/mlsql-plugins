@@ -1,10 +1,10 @@
 moduleName=connect-persist-app-2.4
 mainClass=tech.mlsql.plugins.app.ConnectPersistApp
+scala_version=2.11
+spark_version=2.4
 version=0.1.0-SNAPSHOT
 author=allwefantasy
 mlsqlVersions="1.5.0,1.5.0-SNAPSHOT,1.6.0,1.6.0-SNAPSHOT"
 githubUrl=https://github.com/allwefantasy/mlsql-plugins/tree/master/stream-persist
-scala_version=2.11
-spark_version=2.4
 mlsqlPluginType=app
 desc=wow
