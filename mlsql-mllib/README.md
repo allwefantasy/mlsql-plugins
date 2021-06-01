@@ -20,18 +20,24 @@ Check installation:
 
 ## Install at startup
 
-spark-submit command line:
+You should change `spark-submit` command line:
 
 Add Jar:
 
 ```
---jars JAR_PATH
+--jars YOUR_JAR_PATH
 ```
 
-Add Class:
+Register Class:
 
 ```
 -streaming.plugin.clzznames tech.mlsql.plugins.mllib.app.MLSQLMllib
+```
+
+If there are more than one class, use comma to seperate them. For example:
+
+```
+-streaming.plugin.clzznames classA,classB,classC
 ```
 
 ## Usage
