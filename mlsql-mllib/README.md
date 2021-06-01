@@ -8,7 +8,13 @@ mlsql_plugin_tool build --module_name mlsql-mllib --spark spark243
 ## Install
 
 ```
-!plugin app add "tech.mlsql.plugins.mllib.app.MLSQLMllib "mlsql-mllib-2.4";
+!plugin app add "tech.mlsql.plugins.mllib.app.MLSQLMllib" "mlsql-mllib-2.4";
+```
+
+Check installation:
+
+```
+!show et/ClassificationEvaluator;
 ```
 
 ## Install at startup
