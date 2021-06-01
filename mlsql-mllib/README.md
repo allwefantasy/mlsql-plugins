@@ -15,6 +15,7 @@ Check installation:
 
 ```
 !show et/ClassificationEvaluator;
+!show etc/RegressionEvaluator;
 ```
 
 ## Install at startup
@@ -35,10 +36,21 @@ Add Class:
 
 ## Usage
 
+Classification:
+
 ```sql
 predict data as RandomForest.`/tmp/model` as predicted_table;
 run predicted_table as ClassificationEvaluator.``;
 ```
+
+Regression:
+
+```sql
+predict data as LinearRegressionExt.`/tmp/model` as predicted_table;
+run predicted_table as RegressionEvaluator.``;
+```
+
+
 
 
 
