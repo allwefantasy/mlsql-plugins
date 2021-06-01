@@ -47,3 +47,4 @@ Then you can install this plugin(jar file) in [MLSQL Engine](https://docs.mlsql.
 4. mlsql-bigdl
 5. mlsql-excel
 6. stream-persist
+7. mlsql-mllib

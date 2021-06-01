@@ -1,3 +1,5 @@
+mlsql_plugin_tool build --module_name mlsql-mllib --spark spark243
+
 mlsql_plugin_tool upload \
 --module_name mlsql-mllib  \
 --user ${STORE_USER}        \

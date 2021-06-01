@@ -1,11 +1,10 @@
-## Build
+# mlsql-mmlib
 
-```
-pip install mlsql_plugin_tool
-mlsql_plugin_tool build --module_name mlsql-mllib --spark spark243
-```
+This plugin provide ET wrapper for spark-mllib.
 
-## Install
+## Install from store
+
+Execute following command in web console:
 
 ```
 !plugin app add "tech.mlsql.plugins.mllib.app.MLSQLMllib" "mlsql-mllib-2.4";
@@ -18,9 +17,16 @@ Check installation:
 !show etc/RegressionEvaluator;
 ```
 
-## Install at startup
+## Install Manually
 
-You should change `spark-submit` command line:
+Firstly, build shade jar in your terminal:
+
+```shell
+pip install mlsql_plugin_tool
+mlsql_plugin_tool build --module_name mlsql-mllib --spark spark243
+```
+
+then change start script of MLSQL Engine,
 
 Add Jar:
 
