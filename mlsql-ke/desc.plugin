@@ -1,5 +1,5 @@
 moduleName=mlsql-ke-2.4
-mainClass=tech.mlsql.plugins.shell.app.MLSQLShell
+mainClass=tech.mlsql.plugins.ke.app.MLSQLKE
 scala_version=2.11
 spark_version=2.4
 version=0.1.0-SNAPSHOT
