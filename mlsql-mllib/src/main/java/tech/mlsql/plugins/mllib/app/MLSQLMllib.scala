@@ -2,7 +2,7 @@ package tech.mlsql.plugins.mllib.app
 
 import tech.mlsql.common.utils.log.Logging
 import tech.mlsql.ets.register.ETRegister
-import tech.mlsql.plugins.mllib.ets.ClassificationEvaluator
+import tech.mlsql.plugins.mllib.ets.{ClassificationEvaluator, RegressionEvaluator}
 import tech.mlsql.version.VersionCompatibility
 
 /**
@@ -11,6 +11,7 @@ import tech.mlsql.version.VersionCompatibility
 class MLSQLMllib extends tech.mlsql.app.App with VersionCompatibility with Logging {
   override def run(args: Seq[String]): Unit = {
     ETRegister.register("ClassificationEvaluator", classOf[ClassificationEvaluator].getName)
+    ETRegister.register("RegressionEvaluator", classOf[RegressionEvaluator].getName)
   }
 
 
