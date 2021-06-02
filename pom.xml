@@ -24,6 +24,7 @@
         <module>mlsql-analysis-toolkit</module>
         <module>mlsql-mllib</module>
         <module>mlsql-ds</module>
+        <module>mlsql-shell</module>
     </modules>
     <name>MLSQL Plugins</name>
     <url>https://github.com/allwefantasy/mlsql-plugins.git</url>
