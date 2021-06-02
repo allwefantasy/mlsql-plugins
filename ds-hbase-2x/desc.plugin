@@ -1,7 +1,7 @@
-moduleName=ds-hbase-2x-2.4
+moduleName=ds-hbase-2x-3.0
 mainClass=tech.mlsql.plugins.ds.MLSQLHBase2x
-scala_version=2.11
-spark_version=2.4
+scala_version=2.12
+spark_version=3.0
 version=0.1.0-SNAPSHOT
 author=allwefantasy
 mlsqlVersions="1.5.0,1.5.0-SNAPSHOT,1.6.0,1.6.0-SNAPSHOT"

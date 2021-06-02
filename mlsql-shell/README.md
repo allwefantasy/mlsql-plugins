@@ -2,6 +2,8 @@
 
 This plugin provide execute shell command in MLSQL Engine Driver Side.
 
+![](http://store.mlsql.tech/upload_images/6d09a596-cb0a-495c-9a95-6bbcc63be9ab.png)
+
 ## Install from store
 
 Execute following command in web console:
