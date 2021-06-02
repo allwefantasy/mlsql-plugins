@@ -1,6 +1,6 @@
 # mlsql-shell
 
-This plugin provide execute command in MLSQL Engine.
+This plugin provide execute shell command in MLSQL Engine Driver Side.
 
 ## Install from store
 
@@ -51,6 +51,7 @@ If there are more than one class, use comma to seperate them. For example:
 ```sql
 !sh pip install pyjava;
 !sh echo "yes";
+!sh wget "https://github.com/allwefantasy/mlsql-plugins/tree/master/mlsql-shell";
 ```
 
 
