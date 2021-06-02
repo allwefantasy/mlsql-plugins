@@ -10,9 +10,15 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>mlsql-ke-{{spark_binary_version}}_{{scala_binary_version}}</artifactId>
+    <properties>
+        <fastjson.version>1.2.32</fastjson.version>
+    </properties>
     <dependencies>
-       
-
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${fastjson.version}</version>
+        </dependency>
     </dependencies>
 
     <profiles>
