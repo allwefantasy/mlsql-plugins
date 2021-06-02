@@ -1,7 +1,7 @@
-moduleName=mlsql-shell-3.0
+moduleName=mlsql-shell-2.4
 mainClass=tech.mlsql.plugins.shell.app.MLSQLShell
-scala_version=2.12
-spark_version=3.0
+scala_version=2.11
+spark_version=2.4
 version=0.1.0-SNAPSHOT
 author=allwefantasy
 mlsqlVersions=""
