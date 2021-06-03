@@ -20,7 +20,7 @@ class MLSQLShell extends tech.mlsql.app.App with VersionCompatibility with Loggi
     ETRegister.register("CopyFromLocal", classOf[CopyFromLocal].getName)
     CommandCollection.refreshCommandMapping(Map("copyFromLocal" ->
       """
-        |run command as CopyFromLocal.`{1}` where src="{0}";
+        |run command as CopyFromLocal.`{1}` where src="{0}"
         |""".stripMargin))
   }
 

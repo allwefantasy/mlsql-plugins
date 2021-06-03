@@ -25,13 +25,8 @@ class CopyFromLocal(override val uid: String) extends SQLAlg
    * !copyFromLocal src dst;
    */
   override def train(df: DataFrame, path: String, params: Map[String, String]): DataFrame = {
-    val args = JSONTool.parseJson[List[String]](params("parameters"))
 
-    args match {
-      case List(src) =>
-        HDFSOperatorV2.copyToHDFS(src, path, false, false)
-    }
-    
+    HDFSOperatorV2.copyToHDFS(params("src"), path, false, false)
     import df.sparkSession.implicits._
     df.sparkSession.createDataset[String](Seq().toSeq).toDF("content")
   }
