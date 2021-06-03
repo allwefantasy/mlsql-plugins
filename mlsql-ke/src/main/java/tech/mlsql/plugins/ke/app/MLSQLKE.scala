@@ -2,7 +2,7 @@ package tech.mlsql.plugins.ke.app
 
 import tech.mlsql.common.utils.log.Logging
 import tech.mlsql.ets.register.ETRegister
-import tech.mlsql.plugins.ke.ets.KEAPISchedule
+import tech.mlsql.plugins.ke.ets.{KEAPISchedule, KEAutoModel, KEBuildSegment}
 import tech.mlsql.version.VersionCompatibility
 
 /**
@@ -11,6 +11,8 @@ import tech.mlsql.version.VersionCompatibility
 class MLSQLKE extends tech.mlsql.app.App with VersionCompatibility with Logging {
   override def run(args: Seq[String]): Unit = {
     ETRegister.register("KeApi", classOf[KEAPISchedule].getName)
+    ETRegister.register("KeAutoModel", classOf[KEAutoModel].getName)
+    ETRegister.register("KeBuildSegment", classOf[KEBuildSegment].getName)
   }
 
 
