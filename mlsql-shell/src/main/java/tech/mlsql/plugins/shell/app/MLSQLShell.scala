@@ -3,7 +3,7 @@ package tech.mlsql.plugins.shell.app
 import tech.mlsql.common.utils.log.Logging
 import tech.mlsql.dsl.CommandCollection
 import tech.mlsql.ets.register.ETRegister
-import tech.mlsql.plugins.shell.ets.ShellExecute
+import tech.mlsql.plugins.shell.ets.{CopyFromLocal, ShellExecute}
 import tech.mlsql.version.VersionCompatibility
 
 /**
@@ -15,6 +15,12 @@ class MLSQLShell extends tech.mlsql.app.App with VersionCompatibility with Loggi
     CommandCollection.refreshCommandMapping(Map("sh" ->
       """
         |run command as ShellExecute.`` where parameters='''{:all}'''
+        |""".stripMargin))
+
+    ETRegister.register("CopyFromLocal", classOf[CopyFromLocal].getName)
+    CommandCollection.refreshCommandMapping(Map("copyFromLocal" ->
+      """
+        |run command as CopyFromLocal.`{1}` where src="{0}";
         |""".stripMargin))
   }
 
