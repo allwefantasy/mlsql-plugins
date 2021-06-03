@@ -13,7 +13,9 @@ class KEAutoModel(override val uid: String) extends KEAPISchedule with WowParams
 
   override def train(df: DataFrame, path: String, params: Map[String, String]): DataFrame = {
     val jsonObj = new JSONObject
-    jsonObj.put("project", params("project"))
+    val split = path.split("\\.")
+    val connectName = split(0)
+    jsonObj.put("project", split(1))
     if (params.contains("sqls")) {
       val sqls = params("sqls").split("\\;")
       jsonObj.put("sqls", sqls)
@@ -25,9 +27,9 @@ class KEAutoModel(override val uid: String) extends KEAPISchedule with WowParams
       jsonObj.put("with_model_online", params("with_model_online").toBoolean)
     }
     var url = new String
-    ConnectMeta.presentThenCall(DBMappingKey("ke", params("connect_name")), options => {
+    ConnectMeta.presentThenCall(DBMappingKey("ke", connectName), options => {
       url = "http://" + options("host") + ":" + options("port") + "/kylin/api/models/model_suggestion"
     })
-    sendPostAPI(df, params, jsonObj, url)
+    sendPostAPI(df, params, jsonObj, url, connectName)
   }
 }

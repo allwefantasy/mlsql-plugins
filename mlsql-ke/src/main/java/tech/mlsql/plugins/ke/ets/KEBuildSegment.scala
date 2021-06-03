@@ -13,7 +13,9 @@ class KEBuildSegment(override val uid: String) extends KEAPISchedule with WowPar
 
   override def train(df: DataFrame, path: String, params: Map[String, String]): DataFrame = {
     val jsonObj = new JSONObject
-    jsonObj.put("project", params("project"))
+    val split = path.split("\\.")
+    val connectName = split(0)
+    jsonObj.put("project", split(1))
     if (params.contains("start")) {
       jsonObj.put("start", params("start"))
     }
@@ -33,10 +35,10 @@ class KEBuildSegment(override val uid: String) extends KEAPISchedule with WowPar
       jsonObj.put("priority", params("priority").toInt)
     }
     var url = new String
-    ConnectMeta.presentThenCall(DBMappingKey("ke", params("connect_name")), options => {
+    ConnectMeta.presentThenCall(DBMappingKey("ke", connectName), options => {
       url = "http://" + options("host") + ":" + options("port") + "/kylin/api/models/" + params("model") + "/segments"
     })
-    sendPostAPI(df, params, jsonObj, url)
+    sendPostAPI(df, params, jsonObj, url, connectName)
   }
 }
 

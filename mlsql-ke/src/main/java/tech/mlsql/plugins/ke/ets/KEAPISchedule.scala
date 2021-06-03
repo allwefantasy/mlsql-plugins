@@ -22,15 +22,16 @@ class KEAPISchedule(override val uid: String) extends SQLAlg with WowParams with
 
   override def train(df: DataFrame, path: String, params: Map[String, String]): DataFrame = {
     val url = params("url")
+    val connectName = path.split("\\.")(0)
     val method = params.getOrElse("method", "GET")
     if (method.equals("GET")) {
-      sendGETAPI(df, params, url)
+      sendGETAPI(df, params, url, connectName)
     } else if (method.equals("POST")) {
       val jsonObject = JSON.parseObject(params("body"))
-      sendPostAPI(df, params, jsonObject, url)
+      sendPostAPI(df, params, jsonObject, url, connectName)
     } else if (method.equals("PUT")) {
       val jsonObject = JSON.parseObject(params("body"))
-      sendPutAPI(df, params, jsonObject, url)
+      sendPutAPI(df, params, jsonObject, url, connectName)
     } else {
       logInfo("Other request methods are not currently supported")
       df
@@ -41,33 +42,33 @@ class KEAPISchedule(override val uid: String) extends SQLAlg with WowParams with
 
   override def predict(sparkSession: SparkSession, _model: Any, name: String, params: Map[String, String]): UserDefinedFunction = ???
 
-  def sendPostAPI(df: DataFrame, params: Map[String, String], jsonObj: JSONObject, url: String): DataFrame = {
+  def sendPostAPI(df: DataFrame, params: Map[String, String], jsonObj: JSONObject, url: String, connectName: String): DataFrame = {
     val httpPost = new HttpPost(url)
-    setHeader(params, httpPost)
+    setHeader(params, connectName, httpPost)
     httpPost.setEntity(new StringEntity(jsonObj.toJSONString))
     executeHTTPMethod(df, httpPost)
   }
 
-  def sendPutAPI(df: DataFrame, params: Map[String, String], jsonObj: JSONObject, url: String): DataFrame = {
+  def sendPutAPI(df: DataFrame, params: Map[String, String], jsonObj: JSONObject, url: String, connectName: String): DataFrame = {
     val httpPut = new HttpPut(url)
-    setHeader(params, httpPut)
+    setHeader(params, connectName, httpPut)
     httpPut.setEntity(new StringEntity(jsonObj.toJSONString))
     executeHTTPMethod(df, httpPut)
   }
 
-  def sendGETAPI(df: DataFrame, params: Map[String, String], url: String): DataFrame = {
+  def sendGETAPI(df: DataFrame, params: Map[String, String], url: String, connectName: String): DataFrame = {
     val httpGet = new HttpGet(url)
-    setHeader(params, httpGet)
+    setHeader(params, connectName, httpGet)
     executeHTTPMethod(df, httpGet)
   }
 
-  def setHeader(params: Map[String, String], request: HttpRequestBase): Unit = {
+  def setHeader(params: Map[String, String], connectName: String, request: HttpRequestBase): Unit = {
     request.addHeader("Content-Type", "application/json;charset=UTF-8")
     val accept = params.getOrElse("Accept", "application/vnd.apache.kylin-v4-public+json")
     request.addHeader("Accept", accept)
     request.addHeader("Accept-Language", "en")
     var authorization = new String
-    ConnectMeta.presentThenCall(DBMappingKey("ke", params("connect_name")), options => {
+    ConnectMeta.presentThenCall(DBMappingKey("ke", connectName), options => {
       authorization = options("username") + ":" + options("password")
     })
     request.addHeader("Authorization",
