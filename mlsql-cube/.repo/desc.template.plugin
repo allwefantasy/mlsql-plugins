@@ -1,0 +1,16 @@
+moduleName=mlsql-cube-{{spark_binary_version}}
+mainClass=tech.mlsql.plugins.shell.app.MLSQLCube
+scala_version={{scala_binary_version}}
+spark_version={{spark_binary_version}}
+version=0.1.0-SNAPSHOT
+author=allwefantasy
+mlsqlVersions=""
+githubUrl=https://github.com/allwefantasy/mlsql-plugins/tree/master/mlsql-cube
+mlsqlPluginType=app
+desc=mlsql-shell
+
+
+
+
+
+
