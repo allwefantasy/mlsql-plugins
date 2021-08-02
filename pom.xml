@@ -29,6 +29,7 @@
         <module>mlsql-assert</module>
         <module>mlsql-cube</module>
         <module>mlsql-ext-ets</module>
+        <module>mlsql-canal</module>
     </modules>
     <name>MLSQL Plugins</name>
     <url>https://github.com/allwefantasy/mlsql-plugins.git</url>
