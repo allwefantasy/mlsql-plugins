@@ -28,6 +28,9 @@
         <module>mlsql-ke</module>
         <module>mlsql-assert</module>
         <module>mlsql-canal</module>
+        <module>mlsql-language-server</module>
+        <module>mlsql-ext-ets</module>
+        <module>mlsql-cli</module>
     </modules>
     <name>MLSQL Plugins</name>
     <url>https://github.com/allwefantasy/mlsql-plugins.git</url>

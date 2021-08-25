@@ -1,0 +1,16 @@
+moduleName=mlsql-language-server-{{spark_binary_version}}
+mainClass=tech.mlsql.plugins.ke.app.MLSQLLanguageServer
+scala_version={{scala_binary_version}}
+spark_version={{spark_binary_version}}
+version=0.1.0-SNAPSHOT
+author=allwefantasy
+mlsqlVersions=""
+githubUrl=https://github.com/allwefantasy/mlsql-plugins/tree/master/mlsql-language-server
+mlsqlPluginType=app
+desc=mlsql-language-server
+
+
+
+
+
+
