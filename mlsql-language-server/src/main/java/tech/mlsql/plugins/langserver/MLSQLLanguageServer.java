@@ -10,7 +10,7 @@ import org.eclipse.lsp4j.jsonrpc.json.JsonRpcMethod;
 import org.eclipse.lsp4j.jsonrpc.json.JsonRpcMethodProvider;
 import org.eclipse.lsp4j.jsonrpc.services.ServiceEndpoints;
 import org.eclipse.lsp4j.services.*;
-import tech.mlsql.example.app.LocalSparkApp;
+import tech.mlsql.plugins.langserver.launchers.stdio.MLSQLDesktopApp;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,7 +29,7 @@ public class MLSQLLanguageServer implements LanguageServer, Endpoint, JsonRpcMet
         this.textService = new MLSQLDocumentService();
         this.workspaceService = new MLSQLWorkspaceService();
         new Thread(() -> {
-            LocalSparkApp.main(Arrays.array());
+            MLSQLDesktopApp.main(Arrays.array());
         }).start();
     }
 
