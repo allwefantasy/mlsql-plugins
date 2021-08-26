@@ -28,9 +28,11 @@ public class MLSQLLanguageServer implements LanguageServer, Endpoint, JsonRpcMet
     public MLSQLLanguageServer() {
         this.textService = new MLSQLDocumentService();
         this.workspaceService = new MLSQLWorkspaceService();
-        new Thread(() -> {
+        Thread server = new Thread(() -> {
             MLSQLDesktopApp.main(Arrays.array());
-        }).start();
+        });
+        server.setDaemon(true);
+        server.start();
     }
 
     @Override
@@ -42,6 +44,7 @@ public class MLSQLLanguageServer implements LanguageServer, Endpoint, JsonRpcMet
 
     @Override
     public CompletableFuture<Object> shutdown() {
+
         return CompletableFuture.supplyAsync(Object::new);
     }
 
