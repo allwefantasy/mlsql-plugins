@@ -16,7 +16,8 @@ object MLSQLDesktopApp {
       "-streaming.spark.service", "true",
       "-streaming.job.cancel", "true",
       "-streaming.datalake.path", "./data/",
-      "-streaming.driver.port", "9003"
+      "-streaming.driver.port", "9003",
+      "-streaming.plugin.clzznames","tech.mlsql.plugins.ds.MLSQLExcelApp,tech.mlsql.plugins.shell.app.MLSQLShell"
     ) ++ args)
   }
 }
