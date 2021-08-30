@@ -57,6 +57,7 @@ public class MLSQLLanguageServer implements LanguageServer, Endpoint, JsonRpcMet
             }
             exit();
         });
+        stopThread.setDaemon(true);
         stopThread.start();
         return CompletableFuture.supplyAsync(Object::new);
     }
