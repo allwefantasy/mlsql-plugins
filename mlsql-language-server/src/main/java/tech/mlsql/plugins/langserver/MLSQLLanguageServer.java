@@ -1,5 +1,7 @@
 package tech.mlsql.plugins.langserver;
 
+import net.csdn.common.logging.CSLogger;
+import net.csdn.common.logging.Loggers;
 import org.assertj.core.util.Arrays;
 import org.eclipse.lsp4j.InitializeParams;
 import org.eclipse.lsp4j.InitializeResult;
@@ -24,11 +26,13 @@ public class MLSQLLanguageServer implements LanguageServer, Endpoint, JsonRpcMet
     private LanguageClient client = null;
     private final TextDocumentService textService;
     private final WorkspaceService workspaceService;
+    private CSLogger logger = Loggers.getLogger(MLSQLLanguageServer.class.getName());
 
     public MLSQLLanguageServer() {
         this.textService = new MLSQLDocumentService();
         this.workspaceService = new MLSQLWorkspaceService();
         Thread server = new Thread(() -> {
+            logger.info("start....");
             MLSQLDesktopApp.main(Arrays.array());
         });
         server.setDaemon(true);
@@ -44,13 +48,21 @@ public class MLSQLLanguageServer implements LanguageServer, Endpoint, JsonRpcMet
 
     @Override
     public CompletableFuture<Object> shutdown() {
-        System.out.println("shutdown......");
+        logger.info("shutdown......");
+        Thread stopThread = new Thread(() -> {
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                logger.info("", e);
+            }
+            exit();
+        });
         return CompletableFuture.supplyAsync(Object::new);
     }
 
     @Override
     public void exit() {
-        System.out.println("exit......");
+        logger.info("exit......");
         System.exit(0);
     }
 
