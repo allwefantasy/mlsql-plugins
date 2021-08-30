@@ -44,12 +44,13 @@ public class MLSQLLanguageServer implements LanguageServer, Endpoint, JsonRpcMet
 
     @Override
     public CompletableFuture<Object> shutdown() {
-
+        System.out.println("shutdown......");
         return CompletableFuture.supplyAsync(Object::new);
     }
 
     @Override
     public void exit() {
+        System.out.println("exit......");
         System.exit(0);
     }
 
