@@ -65,12 +65,15 @@ public class MLSQLLanguageServer implements LanguageServer, Endpoint, JsonRpcMet
 
     @Override
     public CompletableFuture<?> request(String s, Object o) {
-        throw new RuntimeException("not implemented yet...");
+        System.out.println(s);
+        System.out.println(o);
+        return CompletableFuture.supplyAsync(Object::new);
     }
 
     @Override
     public void notify(String s, Object o) {
-        throw new RuntimeException("not implemented yet...");
+        System.out.println(s);
+        System.out.println(o);
     }
 
     @Override
