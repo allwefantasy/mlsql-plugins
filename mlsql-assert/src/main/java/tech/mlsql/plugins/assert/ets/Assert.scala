@@ -37,10 +37,10 @@ class Assert(override val uid: String) extends SQLAlg
     val tableName = args.head
     val assertString = args.last
     val assertRes = evaluate(tableName, args.drop(1).dropRight(1).mkString(" "))
-    if (assertRes.filter(_ == false).length != 0) {
+    if (assertRes.contains(false)) {
       throw new RuntimeException(assertString)
     }
-    df
+    df.sparkSession.emptyDataFrame
   }
 
   def evaluate(tableName: String, str: String, options: Map[String, String] = Map()) = {
