@@ -3,25 +3,16 @@ package tech.mlsql.plugins.langserver;
 import net.csdn.common.logging.CSLogger;
 import net.csdn.common.logging.Loggers;
 import org.assertj.core.util.Arrays;
-import org.eclipse.lsp4j.InitializeParams;
-import org.eclipse.lsp4j.InitializeResult;
-import org.eclipse.lsp4j.ServerCapabilities;
-import org.eclipse.lsp4j.TextDocumentSyncKind;
-import org.eclipse.lsp4j.jsonrpc.Endpoint;
-import org.eclipse.lsp4j.jsonrpc.json.JsonRpcMethod;
-import org.eclipse.lsp4j.jsonrpc.json.JsonRpcMethodProvider;
-import org.eclipse.lsp4j.jsonrpc.services.ServiceEndpoints;
+import org.eclipse.lsp4j.*;
 import org.eclipse.lsp4j.services.*;
 import tech.mlsql.plugins.langserver.launchers.stdio.MLSQLDesktopApp;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
 /**
  * 25/8/2021 WilliamZhu(allwefantasy@gmail.com)
  */
-public class MLSQLLanguageServer implements LanguageServer, Endpoint, JsonRpcMethodProvider, LanguageClientAware {
+public class MLSQLLanguageServer implements LanguageServer,  LanguageClientAware {
 
     private LanguageClient client = null;
     private final TextDocumentService textService;
@@ -42,8 +33,17 @@ public class MLSQLLanguageServer implements LanguageServer, Endpoint, JsonRpcMet
     @Override
     public CompletableFuture<InitializeResult> initialize(InitializeParams params) {
         final InitializeResult res = new InitializeResult(new ServerCapabilities());
-        res.getCapabilities().setTextDocumentSync(TextDocumentSyncKind.Full);
-        return CompletableFuture.supplyAsync(() -> res);
+        ServerCapabilities serverCapabilities = new ServerCapabilities();
+
+        serverCapabilities.setTextDocumentSync(TextDocumentSyncKind.Full);
+        final CompletionOptions completionOptions = new CompletionOptions();
+        completionOptions.setTriggerCharacters(java.util.Arrays.asList(".", ":", " ", "<"));
+        completionOptions.setResolveProvider(true);
+        serverCapabilities.setCompletionProvider(completionOptions);
+
+        res.setCapabilities(serverCapabilities);
+
+        return CompletableFuture.completedFuture(res);
     }
 
     @Override
@@ -76,26 +76,6 @@ public class MLSQLLanguageServer implements LanguageServer, Endpoint, JsonRpcMet
     @Override
     public WorkspaceService getWorkspaceService() {
         return this.workspaceService;
-    }
-
-    @Override
-    public CompletableFuture<?> request(String s, Object o) {
-        System.out.println(s);
-        System.out.println(o);
-        return CompletableFuture.supplyAsync(Object::new);
-    }
-
-    @Override
-    public void notify(String s, Object o) {
-        System.out.println(s);
-        System.out.println(o);
-    }
-
-    @Override
-    public Map<String, JsonRpcMethod> supportedMethods() {
-        Map<String, JsonRpcMethod> supportedMethods = new HashMap<>();
-        supportedMethods.putAll(ServiceEndpoints.getSupportedMethods(getClass()));
-        return supportedMethods;
     }
 
     @Override
