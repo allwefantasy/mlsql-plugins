@@ -18,7 +18,7 @@ class AutoSuggestWrapper(params: java.util.Map[String, String]) extends Logging 
       JSONTool.parseJson[List[SuggestItem]](jsonStr).asJava
     } catch {
       case e: Exception =>
-        logInfo("Suggest fail", e)
+        logInfo("Suggest fail")
         List[SuggestItem]().asJava
     }
 
