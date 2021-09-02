@@ -32,7 +32,9 @@ public class MLSQLLanguageServer implements LanguageServer, LanguageClientAware 
 
     @Override
     public CompletableFuture<InitializeResult> initialize(InitializeParams params) {
-        LSContext.parse((params.getInitializationOptions()).toString());
+        if(params.getInitializationOptions()!=null){
+            LSContext.parse(params.getInitializationOptions().toString());
+        }
         
         final InitializeResult res = new InitializeResult(new ServerCapabilities());
         ServerCapabilities serverCapabilities = new ServerCapabilities();
