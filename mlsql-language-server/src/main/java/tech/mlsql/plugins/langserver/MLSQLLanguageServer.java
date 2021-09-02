@@ -12,7 +12,7 @@ import java.util.concurrent.CompletableFuture;
 /**
  * 25/8/2021 WilliamZhu(allwefantasy@gmail.com)
  */
-public class MLSQLLanguageServer implements LanguageServer,  LanguageClientAware {
+public class MLSQLLanguageServer implements LanguageServer, LanguageClientAware {
 
     private LanguageClient client = null;
     private final TextDocumentService textService;
@@ -32,12 +32,13 @@ public class MLSQLLanguageServer implements LanguageServer,  LanguageClientAware
 
     @Override
     public CompletableFuture<InitializeResult> initialize(InitializeParams params) {
+        LSContext.parse((params.getInitializationOptions()).toString());
+        
         final InitializeResult res = new InitializeResult(new ServerCapabilities());
         ServerCapabilities serverCapabilities = new ServerCapabilities();
 
         serverCapabilities.setTextDocumentSync(TextDocumentSyncKind.Full);
         final CompletionOptions completionOptions = new CompletionOptions();
-        completionOptions.setTriggerCharacters(java.util.Arrays.asList(".", ":", " ", "<"));
         completionOptions.setResolveProvider(true);
         serverCapabilities.setCompletionProvider(completionOptions);
 

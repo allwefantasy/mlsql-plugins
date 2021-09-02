@@ -1,6 +1,9 @@
 package tech.mlsql.plugins.langserver
 
-import tech.mlsql.autosuggest.app.AutoSuggestController
+import net.csdn.common.jline.ANSI.Renderer.RenderException
+import net.csdn.modules.http.DefaultRestRequest
+import net.csdn.modules.mock.MockRestResponse
+import streaming.rest.RestController
 import tech.mlsql.autosuggest.statement.SuggestItem
 import tech.mlsql.common.utils.log.Logging
 import tech.mlsql.common.utils.serder.json.JSONTool
@@ -13,12 +16,23 @@ import scala.collection.JavaConverters._
 class AutoSuggestWrapper(params: java.util.Map[String, String]) extends Logging {
   def run() = {
     try {
-      val suggest = new AutoSuggestController();
-      val jsonStr = suggest.run(params.asScala.toMap)
+      params.put("executeMode", "autoSuggest")
+      logInfo(JSONTool.toJsonStr(params.asScala.toMap))
+
+      val restRequest = new DefaultRestRequest("POST", params)
+      val restReponse = new MockRestResponse()
+      val controller = new RestController()
+      net.csdn.modules.http.RestController.enhanceApplicationController(controller, restRequest, restReponse)
+      try {
+        controller.script
+      } catch {
+        case _: RenderException =>
+      }
+      val jsonStr = restReponse.content()
       JSONTool.parseJson[List[SuggestItem]](jsonStr).asJava
     } catch {
       case e: Exception =>
-        logInfo("Suggest fail")
+        logInfo("Suggest fail", e)
         List[SuggestItem]().asJava
     }
 
