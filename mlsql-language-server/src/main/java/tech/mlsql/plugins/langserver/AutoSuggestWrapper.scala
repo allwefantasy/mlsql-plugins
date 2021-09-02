@@ -1,5 +1,6 @@
 package tech.mlsql.plugins.langserver
 
+import net.csdn.common.exception.RenderFinish
 import net.csdn.common.jline.ANSI.Renderer.RenderException
 import net.csdn.modules.http.DefaultRestRequest
 import net.csdn.modules.mock.MockRestResponse
@@ -26,7 +27,7 @@ class AutoSuggestWrapper(params: java.util.Map[String, String]) extends Logging 
       try {
         controller.script
       } catch {
-        case _: RenderException =>
+        case _: RenderFinish =>
       }
       val jsonStr = restReponse.content()
       JSONTool.parseJson[List[SuggestItem]](jsonStr).asJava

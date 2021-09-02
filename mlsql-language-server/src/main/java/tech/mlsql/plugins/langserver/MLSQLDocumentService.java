@@ -78,7 +78,11 @@ public class MLSQLDocumentService implements TextDocumentService {
         params.put("sql", finalSql);
         params.put("lineNum", (position.getPosition().getLine() + 1 + increment) + "");
         params.put("columnNum", position.getPosition().getCharacter() + "");
-        params.put("schemaInferUrl", initParams.getOrDefault("engine.url", "http://127.0.0.1:9003/run/script"));
+        String engineURL = initParams.getOrDefault("engine.url", "http://127.0.0.1:9003");
+        if (engineURL.startsWith("/")) {
+            engineURL = engineURL.substring(1);
+        }
+        params.put("schemaInferUrl", engineURL + "/run/script");
         params.put("owner", initParams.getOrDefault("user.owner", "admin"));
 
 

@@ -39,6 +39,9 @@ public class MLSQLLanguageServer implements LanguageServer, LanguageClientAware 
 
         serverCapabilities.setTextDocumentSync(TextDocumentSyncKind.Full);
         final CompletionOptions completionOptions = new CompletionOptions();
+
+        completionOptions.setTriggerCharacters(java.util.Arrays.asList(".", ":", " "));
+
         completionOptions.setResolveProvider(true);
         serverCapabilities.setCompletionProvider(completionOptions);
 
