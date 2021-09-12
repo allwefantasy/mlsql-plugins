@@ -16,6 +16,7 @@ import tech.mlsql.dsl.auth.dsl.mmlib.ETMethod.ETMethod
 import tech.mlsql.ets.SQLGenContext
 import tech.mlsql.lang.cmd.compile.internal.gc._
 import tech.mlsql.plugins.assert.app.MLSQLAssert
+import tech.mlsql.session.{SetItem, SetSession}
 import tech.mlsql.version.VersionCompatibility
 
 import scala.collection.mutable
@@ -32,16 +33,99 @@ class Assert(override val uid: String) extends SQLAlg
    * !assert table ''':status=="success"'''  "all model status should be success"
    */
   override def train(df: DataFrame, path: String, params: Map[String, String]): DataFrame = {
-
+    import df.sparkSession.implicits._
     val args = JSONTool.parseJson[List[String]](params("parameters"))
-    val tableName = args.head
-    val assertString = args.last
-    val assertRes = evaluate(tableName, args.drop(1).dropRight(1).mkString(" "))
-    if (assertRes.contains(false)) {
-      throw new RuntimeException(assertString)
+
+    args match {
+      case List(name, "in", "__set__", msg) =>
+        if (!ScriptSQLExec.context().execListener.env().contains(name)) {
+          throw new RuntimeException(msg)
+        }
+
+      case List(name, "in", "__session__", msg) =>
+        val envSession = new SetSession(df.sparkSession, ScriptSQLExec.context().owner)
+        envSession.envTable.map { t =>
+          val items = t.as[SetItem].collect().toList.map(item => (item.k, item.v)).toMap[String, String]
+          if (!items.contains(name)) {
+            throw new RuntimeException(msg)
+          }
+        }.getOrElse {
+          throw new RuntimeException(msg)
+        }
+
+      case _ =>
+
+        val tableName = args.head
+        val assertString = args.last
+        val expression = args.drop(1).dropRight(1).mkString(" ")
+
+
+        val assertRes = try {
+          tableName match {
+            case "__set__" =>
+              val uuid = UUID.randomUUID().toString.replaceAll("-", "")
+              val variables = new mutable.HashMap[String, Any]
+              val types = new mutable.HashMap[String, Any]
+              variables ++= ScriptSQLExec.context().execListener.env()
+              List(evaluateWithVariableTable(VariableTable(uuid, variables, types), expression))
+
+            case "__session__" =>
+              val envSession = new SetSession(df.sparkSession, ScriptSQLExec.context().owner)
+              envSession.envTable.map { t =>
+                val items = t.as[SetItem].collect().toList.map(item => (item.k, item.v)).toMap[String, String]
+                val uuid = UUID.randomUUID().toString.replaceAll("-", "")
+                val variables = new mutable.HashMap[String, Any]
+                val types = new mutable.HashMap[String, Any]
+                variables ++= items
+                List(evaluateWithVariableTable(VariableTable(uuid, variables, types), expression))
+              }.getOrElse(List[Boolean](false))
+
+            case _ => evaluate(tableName, expression)
+          }
+        } catch {
+          case e: org.apache.spark.sql.AnalysisException =>
+            val column = "'`(.*)`'".r.findFirstIn(e.getMessage()).getOrElse("")
+            throw new RuntimeException(s"${assertString} (Variable [${column}] missing)");
+        }
+
+
+        if (assertRes.contains(false)) {
+          throw new RuntimeException(assertString)
+        }
+
     }
+
+
     df.sparkSession.emptyDataFrame
   }
+
+
+  def evaluateWithVariableTable(variableTable: VariableTable, str: String, options: Map[String, String] = Map()) = {
+    val session = ScriptSQLExec.context().execListener.sparkSession
+    val scanner = new Scanner(str)
+    val tokenizer = new Tokenizer(scanner)
+    val parser = new StatementParser(tokenizer)
+    val exprs = try {
+      parser.parse()
+    } catch {
+      case e: ParserException =>
+        throw new MLSQLException(s"Error in MLSQL Line:${options.getOrElse("__LINE__", "-1").toInt + 1} \n Expression:${e.getMessage}")
+      case e: Exception => throw e
+
+    }
+    val sQLGenContext = new SQLGenContext(session)
+
+    val temptableName = UUID.randomUUID().toString.replaceAll("-", "")
+    val initialVariableTable = VariableTable(temptableName, variableTable.variables, variableTable.types)
+
+    val item = sQLGenContext.execute(exprs.map(_.asInstanceOf[Expression]), initialVariableTable)
+    session.catalog.dropTempView(temptableName)
+    val lit = item.asInstanceOf[Literal]
+    lit.dataType match {
+      case Types.Boolean => lit.value.toString.toBoolean
+    }
+  }
+
 
   def evaluate(tableName: String, str: String, options: Map[String, String] = Map()) = {
     val session = ScriptSQLExec.context().execListener.sparkSession
@@ -76,7 +160,7 @@ class Assert(override val uid: String) extends SQLAlg
         case Types.Boolean => lists += lit.value.toString.toBoolean
       }
     }
-    lists
+    lists.toList
   }
 
   private def rowToMaps(df: DataFrame) = {

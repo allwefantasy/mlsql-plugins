@@ -19,7 +19,7 @@ object MLSQLDesktopApp {
       "-streaming.job.cancel", "true",
       "-streaming.datalake.path", "./data/",
       "-streaming.driver.port", "9003",
-      "-streaming.plugin.clzznames", "tech.mlsql.plugins.ds.MLSQLExcelApp,tech.mlsql.plugins.shell.app.MLSQLShell"
+      "-streaming.plugin.clzznames", "tech.mlsql.plugins.ds.MLSQLExcelApp,tech.mlsql.plugins.shell.app.MLSQLShell,tech.mlsql.plugins.assert.app.MLSQLAssert"
     ))
     val extraMap = arrayToMap(args)
     StreamingApp.main( mapToArray(defaultMap ++ extraMap))

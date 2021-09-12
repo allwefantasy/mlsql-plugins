@@ -2,11 +2,12 @@ package tech.mlsql.plugins.langserver;
 
 import net.csdn.common.logging.CSLogger;
 import net.csdn.common.logging.Loggers;
-import org.assertj.core.util.Arrays;
 import org.eclipse.lsp4j.*;
 import org.eclipse.lsp4j.services.*;
 import tech.mlsql.plugins.langserver.launchers.stdio.MLSQLDesktopApp;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 /**
@@ -22,20 +23,14 @@ public class MLSQLLanguageServer implements LanguageServer, LanguageClientAware 
     public MLSQLLanguageServer() {
         this.textService = new MLSQLDocumentService();
         this.workspaceService = new MLSQLWorkspaceService();
-        Thread server = new Thread(() -> {
-            logger.info("start....");
-            MLSQLDesktopApp.main(Arrays.array());
-        });
-        server.setDaemon(true);
-        server.start();
     }
 
     @Override
     public CompletableFuture<InitializeResult> initialize(InitializeParams params) {
-        if(params.getInitializationOptions()!=null){
+        if (params.getInitializationOptions() != null) {
             LSContext.parse(params.getInitializationOptions().toString());
         }
-        
+
         final InitializeResult res = new InitializeResult(new ServerCapabilities());
         ServerCapabilities serverCapabilities = new ServerCapabilities();
 
@@ -48,6 +43,20 @@ public class MLSQLLanguageServer implements LanguageServer, LanguageClientAware 
         serverCapabilities.setCompletionProvider(completionOptions);
 
         res.setCapabilities(serverCapabilities);
+
+        Thread server = new Thread(() -> {
+            logger.info("start....");
+            List<String> args = new ArrayList<>();
+            for (String key : LSContext.initParams.keySet()) {
+                if (key.startsWith("engine.spark") || key.startsWith("engine.streaming")) {
+                    args.add("-" + key.substring("engine.".length()));
+                    args.add(LSContext.initParams.get(key));
+                }
+            }
+            MLSQLDesktopApp.main(args.toArray(new String[0]));
+        });
+        server.setDaemon(true);
+        server.start();
 
         return CompletableFuture.completedFuture(res);
     }
