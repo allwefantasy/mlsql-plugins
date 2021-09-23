@@ -1,20 +1,19 @@
+#!/usr/bin/env bash
+
+ALL_MODUELS="mlsql-shell mlsql-assert mlsql-mllib mlsql-excel connect-persist last-command run-script save-then-load stream-persist table-repartition"
+
+MODUELS=${1}
+
+if [[ "${MODUELS}" == "" ]];then
+   MODUELS = ALL_MODUELS
+fi
 
 for spark_version in spark243 spark311
 do
-./install.sh mlsql-shell ${spark_version}
-./install.sh mlsql-assert ${spark_version}
-./install.sh mlsql-mllib ${spark_version}
-./install.sh mlsql-excel ${spark_version}
-
-
-./install.sh connect-persist ${spark_version}
-
-
-./install.sh last-command ${spark_version}
-./install.sh run-script ${spark_version}
-./install.sh save-then-load ${spark_version}
-./install.sh stream-persist ${spark_version}
-./install.sh table-repartition ${spark_version}
+  for module in ${MODUELS}
+  do
+     ./install.sh ${module} ${spark_version}
+  done
 done
 
 
