@@ -2,7 +2,7 @@ package tech.mlsql.plugins.mllib.app
 
 import tech.mlsql.common.utils.log.Logging
 import tech.mlsql.ets.register.ETRegister
-import tech.mlsql.plugins.mllib.ets.{AutoMLExt, ClassificationEvaluator, RegressionEvaluator}
+import tech.mlsql.plugins.mllib.ets.{AutoMLExt, ClassificationEvaluator, RegressionEvaluator, SampleDatasetExt}
 import tech.mlsql.version.VersionCompatibility
 
 /**
@@ -12,7 +12,8 @@ class MLSQLMllib extends tech.mlsql.app.App with VersionCompatibility with Loggi
   override def run(args: Seq[String]): Unit = {
     ETRegister.register("ClassificationEvaluator", classOf[ClassificationEvaluator].getName)
     ETRegister.register("RegressionEvaluator", classOf[RegressionEvaluator].getName)
-    ETRegister.register("AutoML", classOf[AutoMLExt].getName)
+    ETRegister.register("AutoMLExt", classOf[AutoMLExt].getName)
+    ETRegister.register("SampleDatasetExt", classOf[SampleDatasetExt].getName)
   }
 
 
@@ -22,5 +23,5 @@ class MLSQLMllib extends tech.mlsql.app.App with VersionCompatibility with Loggi
 }
 
 object MLSQLMllib {
-  val versions = Seq("2.1.0", "2.1.0-SNAPSHOT", "2.0.0", "2.0.1")
+  val versions = Seq(">=2.0.0")
 }
