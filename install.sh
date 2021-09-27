@@ -2,8 +2,15 @@ PROJECT=/Users/allwefantasy/Volumes/Samsung_T5/allwefantasy/CSDNWorkSpace/mlsqlp
 
 MOUDLE_NAME=$1
 VERSION="0.1.0-SNAPSHOT"
-SPARK=${2:-spark243}
+V=${2:-3.0}
 MIDDLE="2.4_2.11"
+
+SPARK="spark311"
+
+if [[ "${V}" == "2.4" ]]
+then
+   SPARK=spark243
+fi
 
 if [[ "${SPARK}" == "spark311" ]]
 then

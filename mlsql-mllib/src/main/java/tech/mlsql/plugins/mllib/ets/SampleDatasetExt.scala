@@ -93,7 +93,7 @@ class SampleDatasetExt(override val uid: String) extends SQLAlg
   final val columns: StringArrayParam = new StringArrayParam(this, "columns", "enum:id,features,label")
   setDefault(columns, Array("id"))
   final val size: Param[Long] = new Param[Long](this, "size", "the size of mock data")
-  setDefault(size, 10000)
+  setDefault(size, 10000L)
 
   final val featuresSize: Param[Int] = new Param[Int](this, "featuresSize", "the size of features column")
   setDefault(featuresSize, 100)
