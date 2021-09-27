@@ -78,7 +78,7 @@ class SampleDatasetExt(override val uid: String) extends SQLAlg
 
   override def codeExample: Code = Code(SQLCode,
     """
-      |run command SampleDataset.`` where
+      |run command as SampleDatasetExt.`` where
       |columns="id,features,label"
       |and size="100000"
       |and featuresSize="100"
