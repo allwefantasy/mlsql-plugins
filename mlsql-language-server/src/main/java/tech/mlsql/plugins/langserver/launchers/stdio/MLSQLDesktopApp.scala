@@ -1,6 +1,7 @@
 package tech.mlsql.plugins.langserver.launchers.stdio
 
 import streaming.core.StreamingApp
+import tech.mlsql.common.utils.path.PathFun
 
 import scala.collection.mutable.ArrayBuffer
 
@@ -17,7 +18,7 @@ object MLSQLDesktopApp {
       "-streaming.platform", "spark",
       "-streaming.spark.service", "true",
       "-streaming.job.cancel", "true",
-      "-streaming.datalake.path", "./data/",
+      "-streaming.datalake.path", PathFun.joinPath(".","data"),
       "-streaming.driver.port", "9003",
       "-streaming.plugin.clzznames", "tech.mlsql.plugins.ds.MLSQLExcelApp,tech.mlsql.plugins.shell.app.MLSQLShell,tech.mlsql.plugins.assert.app.MLSQLAssert"
     ))
