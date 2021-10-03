@@ -11,7 +11,11 @@
 
     <artifactId>mlsql-ds-{{spark_binary_version}}_{{scala_binary_version}}</artifactId>
     <dependencies>
-       
+        <dependency>
+            <groupId>com.databricks</groupId>
+            <artifactId>spark-xml_{{scala_binary_version}}</artifactId>
+            <version>0.13.0</version>
+        </dependency>
 
     </dependencies>
 

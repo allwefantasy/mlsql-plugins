@@ -11,7 +11,11 @@
 
     <artifactId>mlsql-ds-3.0_2.12</artifactId>
     <dependencies>
-       
+        <dependency>
+            <groupId>com.databricks</groupId>
+            <artifactId>spark-xml_2.12</artifactId>
+            <version>0.13.0</version>
+        </dependency>
 
     </dependencies>
 
