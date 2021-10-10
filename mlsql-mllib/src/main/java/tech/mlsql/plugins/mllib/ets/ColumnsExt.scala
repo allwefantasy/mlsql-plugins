@@ -25,7 +25,7 @@ class ColumnsExt(override val uid: String) extends SQLAlg
     val dfName = params("__dfname__")
     if (_fields.length == 0) return df
     _action match {
-      case "drop" =>
+      case "drop" | "remove" =>
         val newdf = df.drop(_fields: _*)
         newdf.createOrReplaceTempView(dfName)
         newdf
