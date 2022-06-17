@@ -11,7 +11,7 @@
 
     <artifactId>mlsql-ke-3.0_2.12</artifactId>
     <properties>
-        <fastjson.version>1.2.32</fastjson.version>
+        <fastjson.version>1.2.83</fastjson.version>
     </properties>
     <dependencies>
         <dependency>
